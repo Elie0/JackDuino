@@ -1,9 +1,8 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
-//const localIP = '192.168.1.5';
 const app = express();
-//const port = 3000;
+const port = 3000;
 
 app.use(cors());
 app.use(bodyParser.json());
@@ -24,6 +23,6 @@ app.get('/api/temperature', (req, res) => {
   res.json({ temp }); 
 });
 
-app.listen(port, /*localIP,*/ () => {
+app.listen(port, () => {
   console.log(`Server is running on port ${port}`);
 });
