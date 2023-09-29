@@ -1,0 +1,307 @@
+.plc 
+    +d('c')
+        color: $plc
+    +d('bg')
+        background-color: $plc
+    +d('bd')
+        border-color: $plc 
+    +d('bd-d5')
+        border-color: $bg-grey
+    +d('bg-d5')
+        background-color: darken($plc, 5%)
+    +d('c-d55')
+        //color: darken($plc, 55%)
+        color: $tlc
+    +d('c-d35')
+        color: darken($plc, 35%)
+    +d('bg-d55')
+        background-color: darken($plc, 55%)
+    +d('bd-d55')
+        border-color: darken($plc, 55%)
+
+.slc 
+    +d('c')
+        color: $slc
+    +d('bg')
+        background-color: $slc
+    +d('bd')
+        border-color: $slc
+        
+.tlc 
+    +d('c')
+        color: $tlc
+    +d('bg')
+        background-color: $tlc
+    +d('bd')
+        border-color: $tlc
+
+.qlc 
+    +d('c')
+        color: $qlc
+    +d('bg')
+        background-color: $light-grey
+    +d('bd')
+        border-color: $qlc
+
+.lc 
+    +d('c')
+        color: $lc
+    +d('bg')
+        background-color: $lc
+    +d('bd')
+        border-color: $lc
+
+.pdc 
+    +d('c')
+        color: $pdc
+    +d('bg')
+        background-color: $pdc
+    +d('bd')
+        border-color: $pdc
+    +d('bd-o18')
+        border-color: rgba($pdc, .18)
+
+.sdc 
+    +d('c')
+        color: $sdc
+    +d('c-l50')
+        color: lighten($sdc, 50%)
+    +d('bg')
+        background-color: $sdc
+    +d('bg-l64')
+        background-color: lighten($sdc, 64%)
+    +d('bg-l70')
+        background-color: lighten($sdc, 70%)
+    +d('bd')
+        border-color: $sdc
+    +d('bd-l50')
+        border-color: lighten($sdc, 50%)
+    
+
+.main-nav
+    background-color: $lighter-violet
+    +e('header')
+        @extend .pdc-bg    
+    +e('item')
+        @extend .lc-c 
+    +e('subitem')
+        color: $lc !important
+        &.active, &:hover
+            color: $tlc !important
+
+.main-header
+    @extend .pdc-bg //.lc-bg
+    &__title
+      @extend .lc-c
+    &__user-text-wraper
+      @extend .lc-c
+
+.entity-header
+    +grid-box-shadow()
+    @extend .lc-bg
+    &__save-btn
+        background-color: rgba($tlc, 1)
+        @extend .lc-c
+
+.entity-header
+    .ui-splitbutton-button.entity-header__action-btn button
+        background-color: rgba($tlc, 1)
+        &:focus, &:hover, &:active
+            background-color: rgba($tlc, 1)
+
+.list-header
+    @extend .lc-bg
+    .myTask-header__create-btn, .myTask-header__btn
+        border-radius: 5px !important
+        &.myTask-header__btn
+            min-width: 65px !important
+        @extend .slc-bg
+        @extend .lc-c
+    .hrFilter
+        @extend .pdc-bd-o18
+        clear: both
+    .ui-splitbutton-button.entity-header__action-btn button
+        border: transparent
+        height: 33px
+        &:focus, &:hover, &:active
+            border: transparent !important
+        &.ui-corner-left
+            border-top-left-radius: 10px
+            border-bottom-left-radius: 10px
+            cursor: default
+        &.ui-corner-right
+            border-top-right-radius: 10px
+            border-bottom-right-radius: 10px
+        background-color: rgba($tlc, 1)
+        &:focus, &:hover, &:active
+            background-color: rgba($tlc, 1)
+    .myTask-header
+        height: 40px !important
+        &__title
+            font-size: 17px
+
+.entity-body__banner
+    @extend .tlc-bg
+    @extend .lc-c
+
+.input-group
+    +e('search-btn')
+      @extend .sdc-c-l50
+      @extend .sdc-bd-l50 
+      &:active, &:focus, &:hover, &:active:hover, &:active:focus
+        @extend .lc-bg
+        @extend .sdc-c
+        @extend .sdc-bd-l50
+    +e('search-input')
+      @extend .sdc-bd-l50
+      &:focus
+        @extend .sdc-bd-l50
+    +e('text')
+        @extend .sdc-bd-l50
+    +e('btn')
+        @extend .sdc-bg-l64
+        &:hover, &:focus, &:active
+            @extend .sdc-bd-l50
+            @extend .sdc-bg-l64
+
+.input-group-btn.selection-form
+    @extend .sdc-bd-l50
+    @extend .sdc-bg-l64
+
+.entity-body--myTasks-pb0
+    padding-top: 30px
+    
+.entity-body--myTasks
+    background-color: transparent
+
+.entity-body  
+    .date-input
+        +e('icon')
+            .ui-datepicker-trigger
+                @extend .sdc-c
+                @extend .sdc-bg-l64
+                @extend .sdc-bd-l50
+                &:hover, &:active
+                    @extend .sdc-c
+                    @extend .sdc-bg-l64
+                    @extend .sdc-bd-l50
+    +e('radio-btn')
+        .ui-radiobutton-box.ui-state-active
+            @extend .sdc-c
+            background-color: inherit
+            border-color: inherit
+    +e('chkbox')
+        .ui-chkbox-box.ui-state-active
+            background-color: inherit
+            border-color: inherit
+            color: inherit
+    +e('grid')
+        .ui-datatable th.ui-state-default
+            @extend .plc-bg
+        .ui-datatable tbody > tr.ui-widget-content, tr.ui-state-default
+            @extend .plc-bd
+        .ui-datatable tbody > tr.ui-widget-content.ui-datatable-odd
+            @extend .lc-bg
+            &.ui-state-highlight
+                @extend .qlc-bg
+        .ui-datatable tbody.ui-datatable-hoverable-rows > tr.ui-widget-content:not(.ui-state-highlight):hover
+            background-color: $lighter-grey
+            color: $pdc
+        .ui-datatable tbody > tr.ui-widget-content.ui-state-highlight
+            @extend .qlc-bg
+            color: $mov
+        .ui-widget-content a
+            @extend .plc-c-d35
+        .ui-datatable .ui-paginator
+            @extend .plc-bd
+            .ui-paginator-element
+                @extend .plc-bd
+                color: $pdc
+                &:hover
+                    background-color: transparent
+                    border-color: transparent
+            .ui-paginator-pages
+                &:hover
+                    background-color: $plc
+                    @extend .plc-bd
+            .ui-paginator-page
+                color: $pdc
+                &.ui-state-active
+                    @extend .plc-bg
+                    color: $pdc
+    +e('child-grid')
+        tr
+            border: none
+        .ui-datatable tbody > tr.ui-widget-content.ui-datatable-odd
+            background-color: #f1f1f3 
+        .ui-widget-content
+            background-color: #f1f1f3 
+        .first-column.ui-state-default.ui-unselectable-text, td.first-column
+            @extend .lc-bg 
+        tbody.ui-datatable-data.ui-widget-content.ui-datatable-hoverable-rows 
+            tr.ui-widget-content > td 
+                @extend .plc-bd
+
+.ui-datatable 
+    .ui-datatable-thead
+        >tr
+            >th
+                font-weight: bold
+                font-size: 13px
+.ui-dropdown 
+    .ui-dropdown-trigger
+        width: 2.0em
+.ui-tabview
+    padding: 0px
+.btn
+    &.fab-btn
+      background: $plc
+      color: $tlc !important
+
+button[disabled]
+    opacity: 0.6
+
+.ui-dialog
+    .panel-default
+        border: none
+        background: none
+
+.ui-button
+    &-cancel
+        @extend .ui-button
+        background: white !important
+        border: 1px solid $tlc !important
+        color: $tlc !important
+    &-delete
+        @extend .ui-button
+        background: $slc !important
+        border: 1px solid $slc !important
+        color: white !important
+    &-save
+        @extend .ui-button
+        background: $tlc !important
+        border: 1px solid $tlc !important
+        color: white !important
+    &-default
+        @extend .ui-button
+        background: $plc !important
+        border: 1px solid $plc !important
+        color: $tlc !important
+
+.form-group-flex
+    @extend .form-group
+    display: flex
+    justify-content: flex-start
+    align-items: flex-end
+    padding-bottom: 10px
+ 
+.sliding-header-wrapper
+    .sliding-header-info
+        .entity-header__info
+            flex: 0 0 auto
+            max-width: 90px
+
+.attachment-list
+    list-style: none
+    li
+        margin-bottom: 6px

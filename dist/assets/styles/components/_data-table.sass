@@ -1,0 +1,103 @@
+.data-table-wrapper
+  .ui-datatable th.ui-state-active
+    color: #212121
+  .ui-datatable th.ui-state-active:hover
+    //background-color: #d3d5d8
+
+.entity-title-btn-wrapper
+  .entity-title
+    float: left
+  .table-add-btn
+    float: right
+    background-color: $tlc
+    padding: 5px 15px
+    border-radius: 5px
+    border: none
+    &.ui-button:focus, &.ui-button:hover
+      border: none
+      background-color: $tlc
+
+p-datatable tr.not-verified
+  background-color: #ED4040 !important
+  color: #fff !important
+
+p-datatable td.text-right span
+    float: right
+
+p-datatable .delayed,.excluded
+    background-color: #ffd3d3 !important
+
+p-datatable .included
+  background-color: #b1d6b6 !important
+
+p-datatable .white
+  background-color: #ffffff !important
+  
+.highlight-first-row tr:first-of-type
+    background-color: $light-grey
+    td span
+      color: $mov !important
+      font-weight: 700
+
+.data-table-image-column
+    width: 30px
+
+p-datatable.fixed-header
+  height: 500px
+
+.frozen-table .ui-datatable-unfrozen-view
+  right: 0
+  bottom: 56px
+
+.dt-white-bg-black-text-no-bd
+  .ui-datatable .ui-datatable-data tr.ui-state-hover,
+  .ui-datatable .ui-datatable-data tr.ui-state-highlight,
+  .ui-datatable tbody > tr.ui-widget-content.ui-datatable-odd:hover,
+  .ui-datatable tbody > tr.ui-widget-content.ui-datatable-even:hover
+    background: #fff !important
+    font-weight: normal !important
+    color: black !important
+
+.ui-rowgroup-header td
+  padding: 0 !important
+  height: 0 !important
+
+.row-grouped-data-table-headings
+  display: inline-block
+  margin: 15px
+
+.entity-body__grid .ui-widget-content a
+  padding: 10px
+  // height: 0 !important
+
+.data-table-horizontal-scroll .ui-datatable-tablewrapper
+  overflow: auto
+
+p-datatable:after
+  content: ''
+  display: table
+  clear: both
+
+.failure-row
+  color: #D8000C
+  background-color: #FFD2D2
+  font-size: 1em
+  padding: 5px 10px
+  font-weight: bold
+
+.success-row
+  color: #4F8A10
+  background-color: #DFF2BF
+  font-size: 1em
+  padding: 5px 10px
+  font-weight: bold
+
+.ui-datatable-header 
+  &.ui-widget-header
+    border: none
+    padding-top: 0px
+    padding-bottom: 0px
+    background: none
+.ui-widget-header
+  &.ui-datatable-scrollable-header
+    background: $plc !important

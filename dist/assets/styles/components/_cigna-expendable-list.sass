@@ -1,0 +1,20 @@
+.expendable-list
+    +e('header')
+        .ui-accordion-header.ui-state-default.ui-corner-all
+            background-color: #F0F0F0
+            padding: 10px
+            font-size: 18px
+            border: 1px solid white
+            margin: 0px
+            a
+                color: $blue-d-55
+                text-decoration: none
+            &.ui-state-active
+                background-color: #F8F8F8
+                border-bottom: none
+        .ui-accordion-header:not(.ui-state-active):not(.ui-state-disabled):hover a
+            color: $blue-d-55
+        .ui-accordion-content-wrapper
+            .ui-accordion-content.ui-widget-content
+                padding: 1px 0px 20px 55px
+                background-color: #F8F8F8

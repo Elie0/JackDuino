@@ -1,0 +1,1660 @@
+{
+  "Menu": {
+    "eligibility": "eligibility",
+    "claims": "claims",
+    "approvals": "approvals",
+    "benefitproviders": "benefit providers",
+    "reports": "reports",
+    "administration": "administration",
+    "customercare": "customer care",
+    "uploadcapability": "upload capabilities",
+    "userutility": "user utility",
+    "SubMenu": {
+      "dashboard": "Dashboard",
+      "denials": "Denials",
+      "feedreport": "Feed Report",
+      "batchposting": "Batch Posting",
+      "paymentadvice": "Payment Advice",
+      "paymentadvicedetails": "Payment Advice Details",
+      "ofcommunicationlogs": "OF Communication Logs",
+      "logs": "Logs",
+      "settlements": "Settlements",
+      "membercard": "Member Card",
+      "doctors": "doctors",
+      "pricelist": "Price List Comparison",
+      "doctor": "doctor",
+      "plan": "plan",
+      "escalations": "escalations",
+      "approvaluploadfailurereport": "Approval Upload Failure",
+      "policy": "policy",
+      "policyrenewal": "policy renewal",
+      "courierreport": "Courier Report",
+      "membertrueupdatareport": "Member True Up Data Report",
+      "grouptrueupdatareport": "Group True Up Data Report",
+      "clients": "clients",
+      "capability": "capability",
+      "members": "insureds",
+      "sponsors": "sponsors",
+      "setup": "setup",
+      "discount": "discount",
+      "claimprocessing": "claim processing",
+      "batches": "batches",
+      "claimProcessing": "claim processing",
+      "approvaltasks": "Approval Tasks",
+      "shifts": "Shifts",
+      "benefitprovider": "benefit provider",
+      "services": "Services",
+      "uploads": "uploads",
+      "claims": "claims",
+      "downloads": "Downloads",
+      "search": "Search",
+      "payerfeeds": "Payer Feeds",
+      "uploadmembers": "Upload Members",
+      "uploadfeed": "Upload Feed",
+      "monitoring": "Monitoring",
+      "policies": "policies",
+      "courier": "courier",
+      "saico": "saico",
+      "report": "Report",
+      "memberdetails": "Member Details",
+      "account": "account",
+      "brokereobreport": "Broker",
+      "ripremiumreports": "Premium Report",
+      "medicinepricelist": "Medicine Price List",
+      "bankaccounts": "Bank Accounts",
+      "banks": "Banks",
+      "currencyrates": "Currency Rates",
+      "policyinvoice": "Policy Invoice",
+      "ciebreport": "CIEB Report",
+      "rpreport": "RP Reports",
+      "premiumreports": "Premium Reports",
+      "policyposting": "Policy Posting",
+      "creditdebitreport": "Credit Debit Report",
+      "settlementreport": "Settlement Report",
+      "memberstatusreport": "Member Status Report",
+      "claimpaymentreport": "Claim Payment Report",
+      "batchpostexclusion": "Batch Post Exclusion",
+      "previousclaimsexperiencereport": "Previous Claims Experience Report",
+      "medicalpaymentreport": "Medical Payment Report",
+      "medicalpaymentmemberreport": "Medical Payment Member Report",
+      "lossratioreport": "Loss Ratio Report",
+      "policyclaimspaymentreport": "Policy Claims Payment Report",
+      "irqafgreport": "IRQ/AFG Report",
+      "claimssavingsreport": "Claims Savings Report",
+      "claimsdetailsupdationreport": "Claims Details Updation Report",
+      "financialinsuranceclaimsreport": "Financial Insurance Claims Report",
+      "claimreconciliationreport": "Claim Reconciliation Report",
+      "chequereport": "Cheque Report",
+      "claimbatchregistrationreport": "Claim Batch Registration Report",
+      "soareport": "SOA Report",
+      "pcfreport": "PCF Report",
+      "paymentreport": "Payment Report",
+      "paymentsummaryreport": "Payment Summary Report",
+      "creditdebitsettlement": "Credit Debit Settlement",
+      "monthlyreinsurancereport": "Monthly Reinsurance Report",
+      "paidclaimfilereport": "Paid Claim File Report",
+      "outstandingbatchreport": "Outstanding Batch Report",
+      "providerstatementofaccountreport": "Provider Statement Of Account Report",
+      "paidclaimauditreport": "Paid Claim Audit Report",
+      "creditnotesreport": "Credit Notes Report",
+      "paymentdetailsreport": "Payment Details Report",
+      "cardprint": "Card Print",
+      "memberCard": "Member Card",
+      "planregulator": "Plan Regulator",
+      "sponsor": "Sponsor",
+      "establishment": "Establishment",
+      "broker": "Broker",
+      "salesagent": "Sales Agent",
+      "monthlyorweeklyreport": "Monthly/Weekly Report",
+      "membermarkettype": "Member Market Type",
+      "dhamemberregisterreport": "Dha Member Register Report",
+      "haadmemberregisterreport": "Haad Member Register Report",
+      "dhaclaimsexperiencereport": "DHA Claims Experience Report",
+      "clientcompliancereport": "Client Compliance Report",
+      "compliancemembersreport": "Compliance Members Report",
+      "memberlevelreport": "Member Level Report",
+      "premiumtransfer": "Premium Transfer",
+      "policycoveragereport": "Policy Coverage Report",
+      "regulatoryclientreport": "Regulatory Client Report",
+      "volumediscountreport": "Volume Discount Report",
+      "claimsbatchesexportreport": "Claims Batches Export Report",
+      "outstandingreport": "Outstanding Report",
+      "remittanceadvice": "Remittance Advice",
+      "claimsrejectionreport": "Claims Report",
+      "claimsdoctorreport": "Claims Doctor Report",
+      "providerpaiddetailsreport": "Provider Paid Details Report",
+      "executivereport": "Executive Report",
+      "executivereportoman": "Executive Report - Oman",
+      "uploadmemberphoto": "Upload Member Photo",
+      "cignareport": "Cigna Report",
+      "averageclaimsreport": "Average Claims Report",
+      "monthlyoperatingreport": "Monthly Operating Report",
+      "weeklypendingreport": "Weekly Pending Report",
+      "haadclaimsubmission": "HAAD Claim Submission",
+      "dhatemplatereport": "DHA Template V1 Report (Batch Status)",
+      "dhatemplatev2report": "DHA Report V2 (Claim Net Status)",
+      "limitedbenefitprovider": "Limited Benefit Provider",
+      "rolemanagement": "Role Management",
+      "usermanagement": "User Management",
+      "packagemanagement": "Package Management",
+      "utilizationlog": "Utilization Log",
+      "eobreport": "EOB Report",
+      "changepassword": "Change Password",
+      "covers": "Covers",
+      "reconciliationdenialmapping": "Reconciliation Denial Mapping",
+      "dhamemberregister": "DHA Member Register",
+      "haadpersonregister": "HAAD Person Register",
+      "dharegulatorysearch": "DHA Regulatory Search",
+      "reimbursementrequest": "Member Reimbursement Request",
+      "reconciliation": "Reconciliation",
+      "eprescriptiondetails": "E-Prescription Details",
+      "policyfeedfile": "Policy Feed File",
+      "pendingpolicies": "Pending Policies",
+      "reconciliationtesting": "Reconciliation Testing",
+      "bphaadapprovals": "HAAD Approvals Benefit Providers"
+    }
+  },
+  "General": {
+    "maritalStatus": {
+      "S": "Single",
+      "M": "Married",
+      "D": "Divorced",
+      "W": "Widdowed",
+      "U": "Unknown"
+    }
+  },
+  "Eligibility": {
+    "Policies": "Policies",
+    "Search": "Search for ",
+    "Policy": {
+      "Policy-details": {
+        "Title": "Policy Details",
+        "General": {
+          "Title": "GENERAL",
+          "PolicyNumber": "Policy No",
+          "PolicyId": "Policy ID",
+          "EndorsementNb": "Endorsement No",
+          "PayerEndNb": "Payer End. No",
+          "EndType": "Endorsment Type",
+          "PayerPolicyNb": "Payer Policy No",
+          "Regulator": "Regulator",
+          "RegulatorPolicyNb": "Regulator Pol No",
+          "Client": "Client",
+          "Plan": "Plan",
+          "Broker": "Broker"
+        },
+        "Date": {
+          "Title": "DATE",
+          "Issue": "Issue Date",
+          "Effective": "Effective Date",
+          "UwYear": "UW Year",
+          "Expiry": "Expiry Date"
+        },
+        "financials": {
+          "title": "FINANCIALS",
+          "amount": "Limit Amount",
+          "net": "Net Premium",
+          "maxCopaymentAmt": "Max Copayment Amt",
+          "total": "Annual Premium",
+          "maxRefund": "Max Refund",
+          "premiumGross": "Gross Premium",
+          "vatAmount": "VAT Amount"
+        },
+        "SubGroup": {
+          "Title": "SUB GROUP",
+          "ApplySubGroup": "Apply Sub Group"
+        }
+      },
+      "Eligibility": {
+        "Title": "Eligibility",
+        "RuleTitle": {
+          "age": "AGE",
+          "gender": "GENDER",
+          "maritalStatus": "MARITAL STATUS",
+          "relation": "RELATION"
+        }
+      },
+      "Members": {
+        "MemberList": {
+          "Title": "Member List",
+          "RadioButtonAll": "All",
+          "RadioButtonLastActivities": "Last Activities",
+          "SearchInput": "Search Members",
+          "SerialNb": "Serial No",
+          "Code": "Code",
+          "PayerRef": "Payer Ref",
+          "Name": "Name",
+          "Status": "Status",
+          "ViewDetails": "View Details"
+        },
+        "MemberDetails": {
+          "Info": {
+            "Title": "Policy Member Info",
+            "General": {
+              "Title": "GENERAL",
+              "Action": "Action",
+              "InsSerialNb": "Ins. Serial No",
+              "SubGroup": "Sub-Group",
+              "Member": "Member",
+              "Principal": "Principal",
+              "HospClass": "Hosp. Class",
+              "PlanClass": "Plan Class",
+              "CoInsurance": "Co-Insurance"
+            },
+            "Date": {
+              "Title": "DATE",
+              "Issue": "Issue Date",
+              "Effective": "Effective Date",
+              "Expiry": "Expiry Date"
+            },
+            "PolicyDetails": {
+              "Title": "FINANCIALS",
+              "LimitAmount": "Limit Amount",
+              "PremiumNet": "Premium Net",
+              "maxCopaymentAmt": "Max Copayment Amt",
+              "PremiumTotal": "Premium Total"
+            },
+            "MemberDetails": {
+              "Title": "MEMBER DETAILS",
+              "Dob": "DOB",
+              "Age": "Age",
+              "Gender": "Gender",
+              "MaritalStatus": "Marital Status",
+              "Nationality": "Nationality",
+              "Weigth": "Weigth",
+              "Height": "Height",
+              "Bmi": "Bmi"
+            }
+          },
+          "Covers": {
+            "Title": "Existing Covers",
+            "Nb": "No",
+            "Code": "Code",
+            "Name": "Name",
+            "Limit": "Limit",
+            "Ded": "Ded.",
+            "Net": "Net",
+            "Total": "Total",
+            "ViewDetails": "View Details"
+          },
+          "Others": {
+            "Title": "Profile Info",
+            "Identification": {
+              "Title": "IDENTIFICATION",
+              "PassportNb": "Passport No",
+              "PassportExpiryDate": "Passport Expiry Date",
+              "PassportCopyRec": "Passport Copy Rec",
+              "NatCopyIdRec": "Nat. Copy ID Rec",
+              "dateVisaReceived": "Date visa received",
+              "BorderNb": "Border No",
+              "IqamaEmIdNb": "Iqama / Em ID No",
+              "IqamaEmIdExpDate": "Iqama / Em ID Exp Date",
+              "VisaStatus": "Visa Status",
+              "VisaCancelDate": "Visa Cancel Date",
+              "ReasonForCancellation": "Reason for cancellation",
+              "birthCertificateNo": "Birth Certificate No"
+            },
+            "AccountInfo": {
+              "Title": "ACCOUNT INFO",
+              "Acc": "Acc No",
+              "AccCurrency": "Acc Currency",
+              "Bank": "Bank",
+              "IbanNb": "IBAN No",
+              "AccCountry": "Acc Country",
+              "Branch": "Branch",
+              "AccountHolderName": "Account Holder Name"
+            },
+            "Coc": {
+              "Title": "COC",
+              "CardPrintDate": "Card Print Date",
+              "CocRecDate": "Coc Rec Date",
+              "CocType": "Coc Type",
+              "CocExDate": "Coc Ex Date",
+              "cocException": "Coc Exception",
+              "CocElDate": "Coc El Date",
+              "EntryPermitDate": "Entry Permit Date",
+              "EntryPermitReceived": "Entry Permit Received"
+            },
+            "Other": {
+              "Title": "OTHER",
+              "Designation": "Designation",
+              "Uid": "UID",
+              "TradeLicNb": "Trade Lic No",
+              "ResidenceLocation": "Residence Location",
+              "WorkLocation": "Work Location",
+              "WorkCountry": "Work Country",
+              "SalaryType": "Salary Type",
+              "SalaryRange": "Salary Range",
+              "SalaryCurrency": "Salary Currency",
+              "HireDate": "Hire Date",
+              "Emirate": "Emirate",
+              "MemberType": "Member Type",
+              "EntityType": "Entity Type"
+            }
+          }
+        }
+      }
+    },
+    "address": {
+      "title": "Address Details",
+      "general": {
+        "title": "GENERAL",
+        "country": "Country",
+        "city": "City",
+        "province": "Province",
+        "state": "State",
+        "area": "Area",
+        "areaCode": "Area Code",
+        "street": "Road / Street",
+        "zipCode": "Zip Code / Block",
+        "poBox": "PoBox",
+        "building": "Building Name",
+        "floor": "Floor",
+        "plot": "Building No",
+        "flat": "Flat",
+        "addressLine1": "Address Line 1",
+        "addressLine2": "Address Line 2",
+        "addressLine3": "Address Line 3"
+      },
+      "home-contact": {
+        "title": "Home Contact",
+        "phone": "Phone",
+        "mobile": "Mobile",
+        "fax": "Fax",
+        "email": "Email"
+      },
+      "work-contact": {
+        "title": "Work Contact",
+        "phone": "Phone",
+        "mobile": "Mobile",
+        "fax": "Fax",
+        "email": "Email"
+      }
+    },
+    "insureds": {
+      "insured-details": {
+        "title": "Insured Info",
+        "name": {
+          "title": "NAME",
+          "titleId": "Title",
+          "firstName": "First Name",
+          "middleName": "Middle Name",
+          "lastName": "Last Name",
+          "firstNameAr": "First Name Ar",
+          "middleNameAr": "Middle Name Ar",
+          "lastNameAr": "Last Name Ar"
+        },
+        "general": {
+          "title": "GENERAL",
+          "dob": "Date Of Birth",
+          "nationalId": "National Id No",
+          "nationality": "Nationality",
+          "maritalStatus": "Marital Status",
+          "gender": "Gender"
+        },
+        "reference": {
+          "title": "REFERENCE",
+          "code": "Code",
+          "employee": "Employee",
+          "clientRef": "Client Ref",
+          "client": "Client",
+          "clientBranch": "Client Branch",
+          "payer": "Payer"
+        },
+        "account": {
+          "title": "ACCOUNT",
+          "accountNo": "Account No",
+          "accountCurrencyId": "Account Currency",
+          "bankId": "Bank",
+          "ibanNo": "Iban",
+          "accountName": "Account Name"
+        }
+      }
+    },
+    "clients": {
+      "client-details": {
+        "title": "Client Info",
+        "reference": {
+          "title": "REFERENCE",
+          "code": "Code",
+          "name": "Name",
+          "payer": "Payer",
+          "payerRef": "PayerRef",
+          "mainClient": "Main Client"
+        },
+        "general": {
+          "title": "GENERAL",
+          "industry": "Industry",
+          "licenceNo": "Licence No",
+          "licenceExpiry": "Licence Expiry",
+          "commercialRegNo": "Commercial Reg No",
+          "sponsor": "Sponsor"
+        },
+        "branches": {
+          "title": "CLIENT BRANCHES",
+          "description": "Description",
+          "country": "Country",
+          "city": "City"
+        },
+        "contacts": {
+          "title": "CLIENT CONTACTS",
+          "name": "Name",
+          "designation": "Designation",
+          "departement": "Departement",
+          "phoneNo": "PhoneNo",
+          "extension": "Extension",
+          "fax": "Fax",
+          "email": "Email"
+        }
+      }
+    },
+    "rp-report": {
+      "filter": {
+        "receivedFrom": "Received From",
+        "receivedTo": "Recveived To",
+        "invoiceNo": "Invoice No",
+        "parameter": "Parameter"
+      }
+    },
+    "plan-regulator": {
+      "filter": {
+        "plan": "Plan",
+        "regulator": "Regulator",
+        "code": "Code",
+        "name": "Name"
+      },
+      "list": {
+        "plan": "Plan",
+        "regulator": "Regulator",
+        "code": "Code",
+        "name": "Name",
+        "edit": "Edit",
+        "delete": "Delete"
+      },
+      "details": {
+        "title": "Details",
+        "plan": "Plan",
+        "regulator": "Regulator",
+        "code": "Code",
+        "name": "Name"
+      }
+    },
+    "policyGroupRenewal": {
+      "title": "Policy Group Renewal",
+      "fromDate": "Date From",
+      "toDate": "Date To",
+      "policyNumbersTitle": "Enter Policy Group Numbers",
+      "renew": "Renew"
+    },
+    "policyFeedFile": {
+      "title": "Policy Feed File",
+      "policy": "Policy",
+      "payerPolicyNo": "Payer Policy No",
+      "policyEffectiveDate": "Policy Effective Date",
+      "policyExpiryDate": "Policy Expiry Date"
+    },
+    "pendingPolicies": {
+      "header": {
+        "title": "Pending Policies",
+        "policyGroupInfo": "Policy",
+        "user": "User",
+        "status": "Status",
+        "plan": "Plan"
+      }
+    }
+  },
+  "Claims": {
+    "Discount": {
+      "List": {
+        "Filter": {
+          "volumeRebate": "Volume Rebate",
+          "promptPayment": "Prompt Payment",
+          "jumboClaim": "Jumbo Claim"
+        },
+        "title": "Discount",
+        "createNew": "Create New",
+        "benefitProvider": "Benefit Provider",
+        "dateFrom": "Date From",
+        "dateTo": "Date To",
+        "posted": "Posted",
+        "datePosted": "Date Posted",
+        "settledAmount": "Settled Amount",
+        "unPost": "Un-Post",
+        "post": "Post",
+        "viewDetails": "View Details",
+        "delete": "Delete",
+        "deleteTitle": "Delete Discount"
+      },
+      "Details": {
+        "Filter": {
+          "volumeRebate": "Volume Rebate Discount",
+          "promptPayment": "Prompt Payment Discount",
+          "jumboClaim": "Jumbo Claim Discount"
+        },
+        "title": "Discount",
+        "discountType": "Discount Type",
+        "createNew": "Create New",
+        "benefitProvider": "Benefit Provider",
+        "dateFrom": "Date From",
+        "dateTo": "Date To",
+        "claimNo": "Claim No",
+        "dateIncurred": "Date Incurred",
+        "service": "Service",
+        "approvedAmount": "Approved Amount",
+        "totalNetAmount": "Total Net Amount:",
+        "totalDiscountAmount": "Total Discount Amount:",
+        "batchNo": "Batch No",
+        "settlementDate": "Settlement Date",
+        "creditDebitNo": "Credit Debit No",
+        "amount": "Amount",
+        "dueDate": "Due Date",
+        "save": "Save"
+      }
+    },
+    "Batches": {
+      "List": {
+        "MyTasks": "My Tasks",
+        "actions": "Create New",
+        "Filter": {
+          "BatchType": "Batch Type",
+          "StartDateFrom": "Start Date From",
+          "StartDateTo": "Start Date To",
+          "DateRegistered": "Date Registered",
+          "DateCreated": "Date Created",
+          "BenefitProvider": "Benefit Provider",
+          "BatchNo": "Batch No",
+          "Status": "Status",
+          "Ppo": "PPO",
+          "NonPpo": "Non PPO",
+          "Client": "Client",
+          "PolicyNo": "Policy No",
+          "BatchesSources": "Batches Sources",
+          "batchPriorities": "Batch Priorities"
+        },
+        "Grid": {
+          "BatchNb": "Batch No",
+          "ClaimCount": "Claim Count",
+          "DateCreated": "Date Created",
+          "StartDate": "Start Date",
+          "AssignedUser": "Assigned User",
+          "BatchSource": "Batch Source",
+          "DueDate": "Due Date",
+          "Provider": "Provider",
+          "Payer": "Payer",
+          "Status": "Status",
+          "ViewDetails": "View Details",
+          "addClaim": "Add Claim",
+          "ClaimNb": "Claim No"
+        }
+      },
+      "Details": {
+        "header": {
+          "BatchNb": "Batch No",
+          "BatchSource": "Batch Source",
+          "AssignedUser": "Assigned User",
+          "actions": "Actions",
+          "requestedAmount": "Requested Amount",
+          "approvedAmount": "Approved Amount"
+        },
+        "BatchDetails": {
+          "TabTitle": "Batch Details",
+          "Title": "Batch Info",
+          "General": {
+            "Title": "GENERAL",
+            "BatchType": "Batch Type",
+            "Ppo": "PPO",
+            "NonPpo": "Non PPO",
+            "reimbursement": "Reimbursement",
+            "direct": "Direct",
+            "Currency": "Currency",
+            "BaseRate": "Base Rate",
+            "CounterRate": "Counter Rate",
+            "BenefitProvider": "Benefit Provider",
+            "Cover": "Claim Type",
+            "processedClaims": "Processed Claims",
+            "pendingClaims": "Pending Claims",
+            "Amount": "Amount",
+            "NoOfClaims": "No of Claims",
+            "Payer": "Payer",
+            "DateReceived": "Date Received",
+            "DateRegistered": "Date Registered",
+            "SourceFileName": "Source File Name"
+          },
+          "ClaimsSummary": {
+            "Title": "Claims Summary",
+            "AddBtn": "Add"
+          },
+          "PolicyInfo": {
+            "Title": "POLICY INFO",
+            "PolicyNb": "Policy No",
+            "Effective": "Effective",
+            "Expiry": "Expiry",
+            "Client": "Client Code and Name"
+          },
+          "Regulator": {
+            "Title": "REGULATOR",
+            "Regulator": "Regulator",
+            "RegulatorRef": "Regulator Ref",
+            "DateUploaded": "Date Uploaded",
+            "Uploaded": "Uploaded"
+          },
+          "Date": {
+            "Title": "DATE",
+            "Start": "Start",
+            "End": "End",
+            "CreatedDate": "Registration Date",
+            "receivedDate": "Received Date"
+          },
+          "notes": {
+            "title": "NOTES",
+            "notes": "Notes"
+          }
+        },
+        "StatusHistory": {
+          "tabTitle": "Status History",
+          "title": "History",
+          "status": "Status",
+          "date": "Date",
+          "user": "User"
+        }
+      }
+    },
+    "Claim": {
+      "List": {
+        "MyTasks": "My Tasks",
+        "actions": "Create New",
+        "myClaimsSwitcher": "My Claims",
+        "Filter": {
+          "ReceivedFrom": "Received From",
+          "ReceivedTo": "Received To",
+          "BenefitProvider": "Benefit Provider",
+          "ClaimRef": "Claim Ref.",
+          "Member": "Member",
+          "BatchNo": "Batch No",
+          "Ppo": "PPO",
+          "NonPpo": "Non PPO",
+          "Payer": "Payer",
+          "InvoiceNo": "Invoice No",
+          "DateIncurredFrom": "Incurred From",
+          "DateIncurredTo": "Incurred To",
+          "ApprovalNo": "Approval No"
+        },
+        "Grid": {
+          "memberCode": "Member No",
+          "memberName": "Member Name",
+          "claimNumber": "Claim No",
+          "payer": "Payer",
+          "invoiceNo": "Invoice No",
+          "claimedGrossAmount": "Gross Amount",
+          "assignedUser": "Assigned user",
+          "claimedNetAmount": "Net Amount",
+          "treatmentDate": "Treatment Date",
+          "batchNo": "Batch Code",
+          "status": "Claim Status",
+          "batchStatus": "Batch Status",
+          "remove": "Remove",
+          "ClaimNb": "Claim No",
+          "Status": "Status",
+          "ViewDetails": "View Details",
+          "BatchNo": "Batch No",
+          "AdmissionDate": "Admission Date",
+          "DischargeDate": "Discharge Date",
+          "IncurredDate": "Date Incurred",
+          "ApprovedDate": "Date Approved",
+          "Provider": "Provider",
+          "service": "Service Code & Description",
+          "approvedAmount": "Approved Amount",
+          "Currency": "Currency",
+          "serialNo": "#"
+        }
+      },
+      "details": {
+        "header": {
+          "claimNb": "Claim No",
+          "assignedUser": "Assigned User",
+          "previousClaim": "Previous Claim",
+          "nextClaim": "Next Claim",
+          "dataEntryCompleted": "Data Entry Completed"
+        },
+        "claimHeader": {
+          "tabTitle": "Claim Header",
+          "title": "CLAIM INFO",
+          "claimInfo": {
+            "title": "CLAIM INFO",
+            "incurredDate": "Incurred Date",
+            "benefitCategoryId": "Benefit Category",
+            "admission": "Admission",
+            "discharge": "Discharge",
+            "receivedDate": "Claim Received Date",
+            "claimType": "Claim Type",
+            "patientFileNo": "Patient File No",
+            "claimSubtype": "Claim Subtype",
+            "claimNature": "Claim Nature",
+            "doctor": "Doctor",
+            "createdDate": "Registration Date"
+          },
+          "policyMemberInfo": {
+            "Title": "POLICY & MEMBER INFO",
+            "policyNb": "Policy No",
+            "effective": "Effective",
+            "expiry": "Expiry",
+            "class": "Class Coverage",
+            "status": "Status",
+            "employeeNb": "Member Reference",
+            "relation": "Relation",
+            "client": "Group No - Client Name",
+            "member": "Member No - Member Name",
+            "accountNo": "Bank Account No",
+            "accountName": "Bank Account Name"
+          },
+          "regulator": {
+            "title": "REGULATOR",
+            "regulator": "Regulator",
+            "regulatorRef": "Regulator Ref",
+            "dateUploaded": "RA Date Uploaded",
+            "uploaded": "RA Uploaded"
+          },
+          "reference": {
+            "title": "REFERENCE",
+            "refNb": "Ref No",
+            "payerClaimNb": "Payer Claim No",
+            "resubmission": "Resubmission",
+            "invoiceNo": "Invoice No",
+            "invoiceDate": "Invoice Date",
+            "claimNo": "Claim No",
+            "preApprovalNo":"Pre-Approval No",
+            "incurredClaimDate":"Claim Incurred Date"
+          },
+          "delayInfo": {
+            "title": "DELAY INFO",
+            "actualDays": "Actual Days",
+            "allowedDate": "Allowed Date",
+            "bpDelayFees": "Delay Fees",
+            "bpDelayDays": "Delay Days"
+          },
+          "batchInfo": {
+            "title": "BATCH INFO",
+            "batchNb": "Batch No",
+            "dateFrom": "From",
+            "dateTo": "To",
+            "batchType": "Batch Type",
+            "bp": "BP Code and Name",
+            "batchSource": "Batch Source"
+          },
+          "diagnosis": {
+            "title": "DIAGNOSIS",
+            "diseaseType": "Disease Type",
+            "diseaseVersion": "Disease Version",
+            "mainDisease": "Main Disease",
+            "finalDisease": "Final Disease",
+            "disease": "Disease",
+            "type": "Type",
+            "version": "Version"
+          },
+          "financial": {
+            "currency": "Currency"
+          },
+          "beneficiary": {
+            "title": "BENEFICIARY",
+            "name": "Name",
+            "phoneNo": "Phone No",
+            "email": "Email",
+            "addressLine1": "Address Line 1",
+            "addressLine2": "Address Line 2",
+            "accountNo": "Account No",
+            "mopType": "MOP Type",
+            "accountCurrency": "Account Currency",
+            "bank": "Bank",
+            "ibanNo": "IBAN No",
+            "accountName": "Account Name"
+          }
+        },
+        "reimbursement": {
+          "tabTitle": "Reimbursement",
+          "title": "Reimbursement Info",
+          "reimb": {
+            "title": "PROVIDER",
+            "reimbProviderName": "Name",
+            "reimbDocotrName": "Doctor",
+            "reimbProviderCountry": "Country",
+            "reimbProviderAddress": "Address",
+            "reimbProviderPhoneNo": "PhoneNo",
+            "reimbProviderEmail": "Email"
+          }
+        },
+        "claimDetails": {
+          "tabTitle": "Claim Details",
+          "title": "Details",
+          "claimDetailsList": {
+            "cover": "Cover",
+            "type": "Type",
+            "version": "Version",
+            "service": "Service",
+            "denial": "Denial",
+            "exgratia": "Exgratia",
+            "viewDetails": "View Details"
+          },
+          "claimDetailsDialog": {
+            "addService": "Add Service",
+            "editService": "Edit Service",
+            "service": {
+              "title": "SERVICE",
+              "cover": "Cover",
+              "exgratia": "Exgratia",
+              "doctor": "Requested By Doctor",
+              "approvalNo": "Approval No",
+              "occurence": "Occurence",
+              "serviceType": "Service Type",
+              "claimServiceQty": "Quantity",
+              "service": "Service Code & Description",
+              "denial": "Denial",
+              "denialNotes": "Denial Notes",
+              "observation": "Observation"
+            },
+            "coverLimits": {
+              "codeAndDescription": "Cover Code & Description",
+              "limit": "Limit",
+              "consumed": "Consumed",
+              "remaining": "Remaining",
+              "moratorium": "Moratorium",
+              "claimLimit": "Limit Per Cover",
+              "limitCountAmt": "Limit Amount Per Quantity",
+              "lifetimeLimit": "Limit/Lifetime",
+              "annual": "Annual",
+              "count": "Count",
+              "countDays": "Count Days"
+            },
+            "diseaseGrid": {
+              "claimed": "Claimed",
+              "system": "System",
+              "ineligible": "Ineligible",
+              "approved": "Approved",
+              "quantity": "Quantity",
+              "unitPrice": "Unit Price",
+              "grossAmt": "Gross Amount",
+              "discountPct": "Discount %",
+              "DiscountAmt": "Discount Amount",
+              "DeductibleAmt": "Deductible Amount",
+              "CoinsuranceAmt": "Coinsurance Amount",
+              "NetAmt": "Net Amount"
+            },
+            "save": "Save",
+            "cancel": "Cancel"
+          }
+        },
+        "statusHistory": {
+          "tabTitle": "Status History",
+          "title": "History",
+          "status": "Status",
+          "date": "Date",
+          "user": "User"
+        }
+      }
+    },
+    "outstandingBatchReport": {
+      "header": {
+        "title": "Outstanding Batch Report",
+        "asatdate": "As At Date"
+      }
+    },
+    "providerStatementOfAccountReport": {
+      "header": {
+        "title": "Provider Statement Of Account Report",
+        "benefitProvider": "Benefit Provider",
+        "lossMonth": "Loss Month"
+      }
+    },
+    "previousClaimsExperience": {
+      "header": {
+        "title": "Previous Claims Experience Report",
+        "member": "Member"
+      }
+    },
+    "paidClaimAuditReport": {
+      "header": {
+        "title": "Paid Claim Audit Report",
+        "dateFrom": "Incurred Date From",
+        "dateTo": "Incurred Date To",
+        "payerId": "Payers",
+        "batchNumbers": "Batch Numbers",
+        "businessSourceIds": "Business Sources"
+      }
+    },
+    "creditNotesReport": {
+      "header": {
+        "title": "Credit Notes Report",
+        "cnDateFrom": "CN Date From",
+        "cnDateTo": "CN Date To",
+        "payerId": "Payers",
+        "type": "Type"
+      }
+    },
+    "financialInsuranceClaimsReport": {
+      "header": {
+        "title": "Financial Insurance Claims Report",
+        "incurredDateFrom": "Incurred Date From",
+        "incurredDateTo": "Incurred Date To",
+        "transactionDateFrom": "Transaction Date From",
+        "transactionDateTo": "Transaction Date To"
+      }
+    },
+    "batchpostexclusion": {
+      "search": {
+        "batchnumbers": "Batch Numbers"
+      }
+    }
+  },
+  "approvals": {
+    "tasks": {
+      "title": "Approvals",
+      "autoRefresh": "Auto Refresh",
+      "myApprovals": "My Approvals",
+      "filter": {
+        "dateFrom": "Date From",
+        "dateTo": "Date To",
+        "member": "Member",
+        "benefitProvider": "Benefit Provider",
+        "approvalNumber": "Approval No",
+        "client": "Client",
+        "status": "Status",
+        "ppo": "PPO",
+        "nonPpo": "Non PPO",
+        "regulator": "Regulator Ref No",
+        "policyNo": "Policy No",
+        "policies": "Policies",
+        "submissionType": "Submission Type",
+        "transferStatus": "Transfer Status",
+        "approvalStatus": "Approval Status",
+        "recievedFrom": "Received From",
+        "employeeNo": "Employee No",
+        "employeeId": "Employee ID",
+        "assignedUser": "Assigned To",
+        "benefitCategory": "Benefit Category",
+        "claimType": "Claim Type",
+        "claimSubType": "Claim Sub-type"
+      },
+      "datatable": {
+        "approvalNb": "Approval No",
+        "type": "Type",
+        "dateReceived": "Date Received",
+        "memberCode": "Member No",
+        "memberName": "Member Name",
+        "benefitProvider": "Benefit Provider",
+        "approvedAmount": "Approved Amount",
+        "status": "Status",
+        "viewDetails": "View Details",
+        "assignUser": "Assign To User",
+        "assignedUser": "Assigned To",
+        "approvedBy": "Approved By",
+        "decisionBy": "Decision By",
+        "decisionDate": "Decision Date",
+        "primaryDiagnosis": "Primary Diagnosis",
+        "benefitCategory": "Benefit Category",
+        "currency": "Currency"
+      }
+    },
+    "details": {
+      "approvalInfo": {
+        "title": "Details",
+        "general": {
+          "title": "General",
+          "approvalSource": "Approval Source",
+          "dateReceived": "Date Received",
+          "isReimbursement": "Reimbursement",
+          "visitType": "Visit Type",
+          "approvalRefNo": "Approval Ref No",
+          "status": "Status",
+          "userNotes": "User Notes",
+          "TAT": "TAT"
+        },
+        "type": {
+          "title": "Type"
+        },
+        "policy": {
+          "title": "Policy & Member Info",
+          "viewBenifitLimit": "View Benifit Limit",
+          "policyNumber": "Policy No",
+          "memberRef": "Member Reference",
+          "client": "Group No - Client Name",
+          "member": "Member No - Member Name",
+          "payer": "Payer No - Payer Name",
+          "effective": "Policy Inception",
+          "expiry": "Policy Expiry",
+          "deletetionDate": "Deletion Date",
+          "enrollmentDate": "Enrollment Date",
+          "lastMenstruationDate": "Last Menstruation Date",
+          "dateofbirth": "Date of Birth",
+          "class": "Class Coverage",
+          "gender": "Gender",
+          "relation": "Relation",
+          "networks": "Networks",
+          "issuingOffice": "Policy Issuing Office"
+        },
+        "estimation": {
+          "title": "Estimation",
+          "baseRate": "Base Rate",
+          "counterRate": "Counter Rate",
+          "approvedAmount": "Approved Amount",
+          "estimatedCost": "Estimated Cost",
+          "roomCost": "Room Cost",
+          "currency": "Currency"
+        },
+        "regulator": {
+          "title": "Regulator",
+          "uploaded": "Uploaded",
+          "regulator": "Regulator",
+          "referenceNo": "Reference No",
+          "dateUploaded": "Date Uploaded",
+          "pbmApprovalNo": "PBM Approval No"
+        },
+        "benefits": {
+          "title": "Benefits",
+          "claimType": "Claim Type",
+          "nature": "Nature",
+          "claimSubType": "Claim Subtype",
+          "benefitCategory": "Benefit Category"
+        },
+        "benefitProvider": {
+          "title": "Benefit Provider",
+          "benefitProvider": "BP Code - BP Name",
+          "benefitProviderLicense": "BP License",
+          "patientFileNo": "Patient File NO",
+          "treatingPhysicians": "Treating Physician",
+          "doctorLicence": "Doctor License",
+          "speciality": "Speciality",
+          "currency": "Currency",
+          "notes": "Provider Notes",
+          "chiefComplaints": "Chief Complaints"
+        },
+        "admissionDetails": {
+          "title": "Admission Details",
+          "admissionDate": "Admission Date",
+          "operationDate": "Operation Date",
+          "requested": "Requested",
+          "teethList": "Teeth List",
+          "approved": "Approved",
+          "expectedDischarge": "Expected Discharge",
+          "actualDischarge": "Revised Discharge",
+          "roomAndBoard": "Room And Board"
+        },
+        "transferedTo": {
+          "title": "Transfered To",
+          "benefitProvider": "Benefit Provider",
+          "treatingPhysicians": "Treating Physicians"
+        }
+      }
+    }
+  },
+  "uploadCapabilities": {
+    "uploads": {
+      "header": {
+        "title": "Uploads",
+        "regulatory": "Regulatory",
+        "parameter": "Parameter",
+        "payers": "Payer Name",
+        "fromDate": "From Date",
+        "toDate": "To Date",
+        "exportType": "Export Type",
+        "dispositionFlag": "Disposition Flag",
+        "benefitProvider": "Benefit Provider",
+        "batchNumbers": "Batch No's"
+      }
+    },
+    "downloads": {
+      "header": {
+        "title": "Downloads",
+        "regulatory": "Regulatory",
+        "payers": "Payers",
+        "fileType": "File Type"
+      }
+    },
+    "search": {
+      "header": {
+        "title": "Regulator Downloads",
+        "regulatory": "Regulatory",
+        "payers": "Payer Name",
+        "ePartner": "E-Partner",
+        "fileName": "File Name",
+        "fromDate": "Transaction Date From",
+        "toDate": "Transaction Date To",
+        "recordCountFrom": "Count From",
+        "recordCountTo": "Count To",
+        "periods": "Choose Period",
+        "uploadType": "Upload Type",
+        "downloadType": "Download Type",
+        "transactionType": "Transaction Type",
+        "filterFrom": "Filter From"
+      },
+      "table": {
+        "fileId": "File Id",
+        "fileName": "File Name",
+        "senderId": "Sender Id",
+        "receiverId": "Receiver Id",
+        "transactionDate": "Transaction Date",
+        "recordCount": "Record Count",
+        "isDownloaded": "Is Downloaded"
+      }
+    },
+    "uploadMember": {
+      "header": {
+        "title": "Upload Members",
+        "policies": "Policies",
+        "memberNumbers": "Member Numbers",
+        "transactionDateFrom": "Transaction Date From",
+        "transactionDateTo": "Transaction Date To",
+        "cardPrintDateFrom": "Card Print Date From",
+        "cardPrintDateTo": "Card Print Date To",
+        "exportToXML": "Export To XML",
+        "exportToCSV": "Export To csv",
+        "regulator": "Regulator"
+      },
+      "table": {
+        "fileId": "File Id",
+        "fileName": "File Name",
+        "senderId": "Sender Id",
+        "receiverId": "Receiver Id",
+        "transactionDate": "Transaction Date",
+        "recordCount": "Record Count",
+        "isDownloaded": "Is Downloaded"
+      }
+    },
+    "uploadFeed": {
+      "header": {
+        "title": "Upload Feed",
+        "uploadNew": "Upload",
+        "downloadSchema": "Download Template",
+        "dateFrom": "Date From",
+        "dateTo": " Date To",
+        "status": "Status",
+        "name": "Name"
+      },
+      "details": {
+        "header": {
+          "title": "Feed Upload Details",
+          "status": "Status"
+        }
+      },
+      "table": {
+        "fileId": "File Id",
+        "fileName": "File Name",
+        "senderId": "Sender Id",
+        "receiverId": "Receiver Id",
+        "transactionDate": "Transaction Date",
+        "recordCount": "Record Count",
+        "isDownloaded": "Is Downloaded"
+      }
+    },
+    "payerFeeds": {
+      "header": {
+        "title": "Payer Feeds",
+        "payers": "Payers",
+        "fileType": "File Type",
+        "action": "Action",
+        "file": "File",
+        "uploadOption": "Upload Option"
+      }
+    },
+    "feedReport": {
+      "header": {
+        "title": "Feed Report",
+        "dateFrom": "Date From",
+        "dateTo": "Date To",
+        "payers": "Payers",
+        "fileTypes": "File Types",
+        "actions": "Actions",
+        "operations": "Operations",
+        "fileName": "File Name",
+        "statuses": "Statuses"
+      }
+    },
+    "monitoring": {
+      "header": {
+        "title": "monitoring"
+      }
+    },
+    "policies": {
+      "header": {
+        "personRegister": "Person Register",
+        "memberRegister": "Member Register",
+        "exportToXML": "Export To XML",
+        "exportToTXT": "Export To TXT",
+        "fileType": "File Type",
+        "uploadType": "Upload Type",
+        "regulatory": "Regulatory",
+        "parameter": "Parameter",
+        "fromDate": "From Date",
+        "toDate": "To Date",
+        "policyNumbers": "Policy No's",
+        "memberNumbers": "Member No's",
+        "personNumbers": "Member No's",
+        "fileLocation": "File Location",
+        "activePolicies": "Active Policies As On",
+        "n": "N",
+        "e": "E",
+        "m": "M",
+        "s": "S"
+      },
+      "table": {
+        "firstName": "First Name",
+        "middleName": "Middle Name",
+        "lastName": "Last Name",
+        "contactNo": "Contact No",
+        "birthDate": "Birth Date",
+        "gender": "Gender",
+        "nationality": "Nationality",
+        "passportNo": "Passport No",
+        "maritalstatus": "Marital Status",
+        "email": "Email",
+        "emirate": "Emirate",
+        "resLoc": "ResLoc",
+        "workLoc": "WorkLoc",
+        "salary": "Salary",
+        "commission": "Commission",
+        "emiratesIdNo": "Emirates Id No",
+        "uidNo": "Uid No",
+        "memberId": "Member Id",
+        "relation": "Relation",
+        "relationTo": "Relation To",
+        "payerId": "Payer Id",
+        "productOrigin": "Product Origin",
+        "productCode": "Product Code",
+        "productId": "Product Id",
+        "policyId": "Policy Id",
+        "enrollmentDate": "Enrollment Date",
+        "deletionDate": "Deletion Date",
+        "grossPremium": "Gross Premium",
+        "actualPremium": "Actual Premium",
+        "establishmentType": "Establishment Type",
+        "establishmentId": "Establishment Id",
+        "establishmentContactNo": "Establishment Contact No",
+        "establishmentEmail": "Establishment Email",
+        "tranDate": "Tran Date",
+        "cardprintDate": "Card Print Date",
+        "inceptionDate": "Inception Date",
+        "policyDateFrom": "Policy Date From",
+        "policyDateTo": "Policy Date To"
+      }
+    },
+    "claims": {
+      "header": {
+        "title": "Upload Claims",
+        "uploadClaims": "Upload Claims",
+        "fileLocation": "File Location",
+        "batchNumber": "Batch No"
+      }
+    }
+  },
+  "customerCare": {
+    "header": {
+      "title": "Search for a Member"
+    },
+    "filter": {
+      "memberNumber": "Member No",
+      "memberName": "Member Name",
+      "employeeNumber": "Employee No",
+      "employeeId": "Employee ID",
+      "nationalId": "National ID",
+      "PolicyNumber": "Policy No",
+      "policyDateFrom": "Effective From",
+      "policyDateTo": "Effective To",
+      "payerNumber": "Payer No",
+      "payerName": "Payer Name",
+      "groupNumber": "Group No",
+      "classCode": "Class Code",
+      "deptCode": "Department Code",
+      "regReference": "Regulator Reference",
+      "passportNo": "Passport No",
+      "transactionDate": "Transaction Date"
+    },
+    "memberDetails": {
+      "covers": {
+        "header": {
+          "title": "Existing Covers",
+          "roomType": "Room Type",
+          "patientShare": "Patient Share",
+          "registeredPlan": "Registered Plan",
+          "planBenefits": "Plan Benefits",
+          "limitCurrency": "Limit Currency",
+          "premiumCurrency": "Premium Currency"
+        }
+      },
+      "cardPrintHistory": {
+        "grid": {
+          "reference": "Reference",
+          "memberCode": "Member No",
+          "memberName": "Name",
+          "courierName": "Courier Name",
+          "courierDate": "Courier Date",
+          "courierNo": "Courier No",
+          "cardStatus": "Card Status",
+          "cardType": "Card Type",
+          "address": "Address",
+          "name": "Name",
+          "cardIssueDate": "Card Issue Date",
+          "mobileNo": "Mobile No",
+          "workEmail": "Work Email",
+          "printType": "Print Type"
+        }
+      },
+      "regulatorFiles": {
+        "grid": {
+          "regulatorName": "Regulator Name",
+          "memberName": "Member Name",
+          "memberCode": "Member Code",
+          "policyStartDate": "Policy Start Date",
+          "policyEndDate": "Policy End Date",
+          "uploadedDate": "Uploaded Date",
+          "fileId": "File ID",
+          "fileName": "File Name",
+          "valid": "Valid",
+          "status": "Status"
+        }
+      },
+      "utilization": {
+        "grid": {
+          "code": "Code",
+          "benefit": "Benefit",
+          "limitAmount": "Annual Limit",
+          "consumedAmount": "Consumed",
+          "remainingLimit": "Balance",
+          "waiverDays": "Waiver Days",
+          "moratorium": "Moratorium",
+          "limitClaim": "Limit Claim",
+          "limitDays": "Limit Days",
+          "limitLifeTime": "Limit Life Time",
+          "limitCount": "Limit Count",
+          "consumedCount": "Consumed Count",
+          "remainingCount": "Remaining Count",
+          "limitCountDays": "Limit Count Days",
+          "consumedCountDays": "Consumed Count Days",
+          "remainingCountDays": "Remaining Count Days"
+        }
+      }
+    }
+  },
+  "package-management": {
+    "upload": {
+      "header": {
+        "newpackage": "New Package",
+        "matchingpackage": "Matching Package",
+        "continueAddingPackage": "Continue Adding Package"
+      },
+      "details": {
+        "message": "Packages with matching structure were found in CMS"
+      }
+    }
+  },
+  "benefit-providers": {
+    "benefit-provider": {
+      "header": {
+        "id": "ID",
+        "description": "Description",
+        "message": "Enter the Benefit Provider No...",
+        "audit": "Audit"
+      },
+      "details": {
+        "tabTitle": "BP Details",
+        "title": "Benefit Provider Info",
+        "general": {
+          "title": "GENERAL",
+          "bpTypeCode": "Type Code",
+          "bpTypeName": "Type",
+          "code": "BP No",
+          "name": "BP Name",
+          "shortName": "Short Name",
+          "licenceNo": "License No",
+          "licenceExpiry": "License Expiry",
+          "claimSubDays": "Claim Submission",
+          "claimResubDays": "Claim Resubmission",
+          "claimResubCount": "Claim Resubmission Count",
+          "hospClass": "Hosp Class",
+          "currency": "Currency",
+          "bpParent": "BP Parent",
+          "url": "URL",
+          "regulator": "Regulator",
+          "notes": "Notes",
+          "commercialRegNo": "Commercial Reg No"
+        },
+        "financial": {
+          "title": "FINANCIAL",
+          "paymentType": "Payment Type",
+          "bankName": "Bank",
+          "bankBranch": "Bank Branch",
+          "swiftCode": "Swift Code",
+          "iban": "IBAN - A/C No",
+          "currency": "Currency",
+          "accountName": "Account Name - Wire",
+          "customerAccountCode": "Customer (Acc No / Acc Name)",
+          "customerAccountName": "Customer Acc Name",
+          "branchId": "Paying Office",
+          "designationId": "Designation",
+          "contactName": "Contact Name",
+          "paymentTerm": "Payment Term Days",
+          "workPhoneNo": "Phone",
+          "workMobileNo": "Mobile",
+          "workFax": "Fax",
+          "workEmail": "Email",
+          "paymentDays": "Payment Days",
+          "earlyPaymentDays": "Early Payment Days",
+          "earlyPaymentDiscPct": "Early Payment Disc Pct",
+          "promptPaymentDisc": "Prompt Payment Disc",
+          "flatDisc": "Flat Disc",
+          "volumeDisc": "Volume Disc",
+          "additionalDisc": "Additional Disc",
+          "chequeName": "Account Name - Cheque",
+          "ofAccountNo": "OF Account No"
+        },
+        "payment-address": {
+          "title": "PAYMENT ADDRESS",
+          "country": "Country",
+          "city": "City",
+          "addressLine1": "Address Line 1"
+        },
+        "payement-work-contact": {
+          "title": "PAYMENT CONTACT",
+          "workPhone": "Phone",
+          "workMobile": "Mobile",
+          "workFax": "Fax",
+          "workEmail": "Email"
+        },
+        "bp-contacts": {
+          "title": "BP CONTACTS",
+          "name": "Name",
+          "designation": "Designation",
+          "department": "Department",
+          "phoneNo": "PhoneNo",
+          "extension": "Extension",
+          "fax": "Fax",
+          "email": "Email"
+        },
+        "bp-banks": {
+          "title": "BP BANKS",
+          "AccNb": "Acc No",
+          "AccName": "Acc Name",
+          "bank": "Bank",
+          "iban": "Iban",
+          "currency": "Currency"
+        },
+        "claim-type": {
+          "title": "CLAIM TYPE",
+          "type": "Type",
+          "allow": "Allow"
+        },
+        "communication": {
+          "title": "COMMUNICATION",
+          "type": "Type",
+          "description": "Description"
+        },
+        "networks": {
+          "title": "NETWORKS",
+          "name": "Name",
+          "effective": "Effective",
+          "expiry": "Expiry",
+          "isNetworkTier": "Is Network Tier?",
+          "popupTitle": "Benefit Provider Network",
+          "type": "Type",
+          "networkTier": "Network Tier",
+          "eligibleNetworks": "Eligible Networks",
+          "additionalEligibleNetworks": "Additional Eligible Networks"
+        },
+        "location": {
+          "title": "LOCATION",
+          "type": "Type",
+          "description": "Description"
+        }
+      },
+      "address": {
+        "tabTitle": "Address"
+      }
+    }
+  },
+  "administration": {
+    "medicine": {
+      "search": {
+        "title": "Search Medicine Price List",
+        "asAtDate": "As At Date",
+        "reference": "Reference",
+        "version": "Version",
+        "newMedicine": "Add New",
+        "country": "Country",
+        "regulator": "Regulator",
+        "dateFrom": "Date From",
+        "dateTo": "Date To",
+        "veiwDetails": "View Details"
+      },
+      "details": {
+        "searchPlaceHolder": "Search (by code, description)",
+        "title": "Medicine Price List",
+        "asAtDate": "As At Date",
+        "reference": "Reference",
+        "version": "Version",
+        "newMedicine": "Add New",
+        "country": "Country",
+        "regulator": "Regulator",
+        "dateFrom": "Date From",
+        "dateTo": "Date To",
+        "notes": "Notes",
+        "code": "Code",
+        "description": "Description",
+        "cmsCode": "CMS Code",
+        "currency": "Currency",
+        "price": "Price",
+        "discount": "Discount",
+        "netPrice": "Net Price",
+        "edit": "Edit",
+        "save": "Save",
+        "cancel": "Cancel",
+        "delete": "Delete",
+        "deleteTitle": "Remove Price List Record Confirmation",
+        "veiwDetails": "View Details"
+      }
+    },
+    "bankaccount": {
+      "list": {
+        "title": "Search Bank Accounts",
+        "bank": "Bank",
+        "iban": "IBAN",
+        "accountname": "Account Name"
+      }
+    },
+    "bank": {
+      "list": {
+        "bankName": "Bank Name"
+      }
+    },
+    "currencyrates": {
+      "search": {
+        "asatdate": "As At Date",
+        "currency": "Currency",
+        "ratedate": "Rate Date"
+      },
+      "list": {
+        "title": "Currency Rates",
+        "ratedate": "Rate Date",
+        "currency": "Currency",
+        "currencydesc": "Cur Description",
+        "addnew": "Add New"
+      },
+      "details": {
+        "title": "Currency Rates Search",
+        "popuptitle": "Add Currency",
+        "ratedate": "Rate Date",
+        "currency": "Currency",
+        "currencydesc": "Cur Description",
+        "addnewcurrency": "Add New Currency",
+        "save": "Save",
+        "saveandaddnew": "Save & Add New",
+        "cancel": "Cancel",
+        "generate": "Generate"
+      }
+    },
+    "cover": {
+      "list": {
+        "code": "Code",
+        "description": "Description"
+      }
+    },
+    "reconciliationdenialmapping": {
+      "list": {
+        "olddenial": "Old Code",
+        "newdenial": "New Code"
+      }
+    }
+  },
+  "brokerReport": {
+    "title": "Broker EOB Report",
+    "filter": {
+      "broker": "Broker",
+      "policies": "Policies",
+      "effectiveFrom": "Incurred From",
+      "effectiveTo": "Incurred To",
+      "member": "Member"
+    }
+  },
+  "ACB": {
+    "Services": {
+      "title": "Services",
+      "addBtn": "Add A Service"
+    }
+  },
+  "serviceState": {
+    "APPROVED": "Approved",
+    "REJECTED": "Rejected",
+    "APPROVED_BY_USER": "Approved By User",
+    "REJECTED_BY_USER": "Rejected By User",
+    "PENDING": "Pending",
+    "CANCELLED": "Cancelled"
+  },
+  "userutility": {
+    "rolemanagement": "Role Management",
+    "usermanagement": "User Management",
+    "changepassword": "Change Password"
+  },
+  "eprescriptions": {
+    "datatable": {
+      "prescriptionNo": "E-Prescription ID",
+      "externalPrescriptionNo": "Prescription No",
+      "doctor": "Doctor",
+      "token": "Token",
+      "status": "Status",
+      "dateReceived": "Date Received",
+      "viewDetails": "View Details"
+    },
+    "details": {
+      "title": "Details",
+      "generalInfo": {
+        "title": "GENERAL",
+        "prescriptionNo": "E-Prescription ID",
+        "externalPrescriptionNo": "Prescription No",
+        "status": "Status",
+        "mobileNo": "Mobile No",
+        "token": "Token",
+        "createdBy": "Created By",
+        "dateReceived": "Date Received"
+      },
+      "dispenseHistory": {
+        "viewAttachments": "View Attachments"
+      }
+    }
+  }
+}

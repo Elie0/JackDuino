@@ -1,0 +1,197 @@
+.entity-body-tabs
+    +grid-box-shadow()
+    margin: 30px 30px 0px 30px
+    ul.ui-tabview-nav li
+        color: #5c556f
+        border: none
+        // min-width: 10%
+        font-size: 14px
+        display: flex
+        justify-content: center
+        background-color: transparent !important
+        border-top-left-radius: 0px
+        border-top-right-radius: 0px
+        padding: 5px 0px
+        &:hover, &:focus
+            background-color: #f1f1f3 !important
+    .ui-tabview-selected.ui-state-active
+        background-color: $lighter-violet !important
+        border-radius: 0px
+        a 
+            color: #fff
+            font-weight: 800
+        &:hover, &:focus
+            background-color: $lighter-violet !important
+    .ui-tabview-panel.ui-widget-content
+        background-color: $lc
+        border-radius: 8px
+        border-top-left-radius: 0px
+    .ui-tabview-nav
+        border-bottom: 1px solid #eaecf5
+        padding: 0px !important
+    .ui-tabview-panel.ui-widget-content
+        padding: 10px 20px
+
+.entity-body
+    +m('myTasks')
+        padding: 30px 30px 400px 30px
+        background-color: #E0EFFF
+
+.entity-body
+    .date-input
+        +e('icon')
+            .ui-state-default.ui-state-disabled
+                opacity: 0.35
+            .ui-state-disabled, .ui-widget:disabled
+                opacity: 0.7
+            button.ui-corner-all
+                border-top-right-radius: 5px
+                border-bottom-right-radius: 5px
+    +e(child-tabs)
+        .ui-helper-reset
+            line-height: 25px
+        .ui-tabview-panel.ui-widget-content, .ui-tabview.ui-widget.ui-widget-content
+            padding: 0
+        .ui-tabview .ui-tabview-nav li:not(.ui-state-active):not(.ui-state-disabled):hover
+            border-right-color: darken($plc, 5%)
+        .ui-state-default.ui-corner-top
+            height: 47px
+            width: 130px
+            border-right: 1px solid 
+            border-right-color: darken($plc, 5%)
+            border-radius: 0px
+            background-color: #ecf5fe !important
+            &:focus, &:hover
+                background-color: #ecf5fe !important
+                outline: none
+                font-weight: 700
+        .ui-tabview-nav
+            margin-left: -20px
+            margin-right: -20px
+            border: 1px solid 
+            border-left: none
+            border-right: none
+            border-radius: 0px
+            border-color: darken($plc, 5%)
+            margin-top: 16px
+            background-color: #ecf5fe
+        .ui-tabview.ui-widget
+            background-color: transparent
+    +e('radio-btn')
+        label
+            margin-bottom: 0px
+            font-weight: 500
+        .ui-radiobutton-icon
+            font-size: 16px
+            margin-left: -1px
+    +e('chkbox')
+        label
+            font-weight: 300
+            margin-bottom: 0px
+    +e('button')
+        border-radius: 5px
+        padding-left: 10px
+        border: none
+        &:active, &:focus, &:hover
+            background-color: $tlc
+            border: none
+    +e('grid')
+        .ui-datatable th.ui-state-default, .ui-datatable-data>tr>td
+            text-align: left
+            height: 34px
+            border: none
+        .ui-datatable th.ui-state-default
+            padding: 20px 10px 15px
+        .ui-datatable .ui-datatable-data>tr>td
+            padding: 10px  
+            span.ui-cell-data
+                word-wrap: break-word          
+        .ui-datatable tbody > tr.ui-widget-content.ui-state-highlight
+            font-weight: 700
+            td.col-button a
+                display: block
+                text-align: left      
+        .ui-datatable tbody.ui-datatable-hoverable-rows > tr.ui-widget-content:not(.ui-state-highlight):hover
+            td.col-button a
+                display: block
+        tr.ui-widget-content td.col-button a
+            opacity: 0
+            padding: 0
+        .ui-datatable tbody > tr.ui-widget-content.ui-datatable-odd:hover
+            background-color: $light-grey
+        tr.ui-widget-content
+            &:hover
+                background-color: $light-grey
+            &:hover td.col-button a
+                opacity: 1
+        .ui-datatable .ui-sortable-column-icon
+            position: absolute
+        .ui-datatable .ui-paginator
+            float: right
+            // width: 250px
+            padding: 0
+            background: none
+            border: 1px solid
+            margin-top: 20px
+            border-radius: 7px
+            .ui-paginator-prev, .ui-paginator-next
+                border: 0
+            .ui-paginator-element
+                margin: 0
+                border-radius: 0
+                &:focus
+                    outline: none
+            .ui-paginator-pages
+                padding: 0
+            a.ui-paginator-last, a.ui-paginator-first
+                border: 0
+            a.ui-paginator-last span, a.ui-paginator-first span
+                display: none
+            a.ui-paginator-last:before
+                content: "Last"
+            a.ui-paginator-first:before
+                content: "First"
+        .fa-chevron-circle-right:before
+            color: black
+            font-size: 13px
+        .fa-chevron-circle-down:before
+            color: black
+            font-size: 13px
+    +e('child-grid')
+        div.ui-datatable.ui-widget
+            margin-left: -10px
+        thead.ui-datatable-thead > tr.ui-state-default
+            border: none
+        .ui-widget-content
+            border: none
+        tr.ui-widget-content 
+            td.first-column
+                border: none
+    +e('grid')
+        +d('expandableRowGroups')
+            tr.ui-widget-header.ui-rowgroup-header
+                border: 1px solid #D5D5D5
+                background: #9abce0
+                color: #222222
+                height: 38px
+                border-color: #E0EFFF
+
+    +e('dropdown')
+        .ui-dropdown.ui-widget.ui-state-default
+            width: 310px !important
+            border-radius: 5px
+        .ui-dropdown-trigger.ui-state-default
+            padding-top: 1px
+            border-left: none
+            background-color: transparent
+        label
+            height: 32px
+            line-height: 12px
+            background-color: transparent
+            text-align: left
+        label.ui-inputtext
+            padding-left: 20px
+        .ui-dropdown-items.ui-dropdown-list
+            li.ui-state-highlight
+                background-color: $plc
+                color: $sdc

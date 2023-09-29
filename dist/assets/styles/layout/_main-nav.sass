@@ -1,0 +1,30 @@
+.main-nav
+    //.fa.fa-fw
+        //display: none
+    .ui-accordion-header.ui-state-default.ui-corner-all
+        padding-left: 0
+        .fa.fa-fw
+            left: initial
+            right: .8em
+            color: #fff
+        &.ui-state-active
+            .fa.fa-fw
+                right: calc(.8em - 5px)
+    .ui-accordion .ui-accordion-header a
+        padding-left: 0
+    .ui-accordion-content.ui-widget-content
+        padding: 0px
+        background: transparent
+    .ui-accordion-header.ui-state-default.ui-corner-all
+        background: transparent !important
+        border: Transparent
+        padding-left: 0px
+        &:hover, &:focus
+            background: $pdc !important
+            border: none
+        a
+            &:hover, &:focus
+            text-decoration: none
+    .ui-accordion-header.ui-state-default.ui-corner-all.ui-state-active
+        border-right: 5px solid $tlc !important
+        background: $pdc !important

@@ -1,0 +1,50 @@
+@import _vars
+
+=respond-to($screen) 
+	@if $screen == 'xs' 
+		@media screen and (max-width: $screen-xs-max) 
+			@content
+		
+	@if $screen == 'sm' 
+		@media screen and (min-width: $screen-sm-min) and (max-width: $screen-sm-max) 
+			@content
+		
+	@if $screen == 'md' 
+		@media screen and (min-width: $screen-md-min) and (max-width: $screen-md-max) 
+			@content
+		
+	@if $screen == 'lg' 
+		@media screen and (min-width: $screen-lg-min) 
+			@content
+		
+	@if $screen == 'sp' 
+		@media screen and (min-width: $screen-sm-min) 
+			@content
+		
+	@if $screen == 'mp' 
+		@media screen and (min-width: $screen-md-min) 
+			@content
+		
+	@if $screen == 'upto-sm' 
+		@media screen and (max-width: $screen-sm-max) 
+			@content
+		
+	@if $screen == 'upto-md' 
+		@media screen and (max-width: $screen-md-max) 
+			@content
+
+
+=e($selector)
+    &__#{$selector}
+        @content
+
+=m($selector)
+    &--#{$selector}
+        @content
+
+=d($selector)
+    &-#{$selector}
+        @content
+
+=grid-box-shadow()
+	box-shadow: 0 1px 15px 1px rgba(62, 57, 107, 0.07)
