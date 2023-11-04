@@ -118,7 +118,7 @@ app.post('/api/update', (req, res) => {
 
 
 
-server.listen(port,localIP, () => {
+server.listen(port, () => {
   console.log(`Server is running on port ${port}`);
 });
 
