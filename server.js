@@ -4,8 +4,8 @@ const webpush = require('web-push');
 const axios = require('axios');
 const cors = require('cors');
 const socketIo = require('socket.io');
-//const localIP = '192.168.1.118';
-const localIP = '192.168.185.103';
+const localIP = '192.168.1.118';
+//const localIP = '192.168.185.103';
 
 
 
@@ -36,30 +36,12 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 const subscriptions = []; // Store subscriptions here
 
+var fall
 app.post('/api/FallDetected', (req, res) => {
-  const fallStatus = req.body.fallstatus;
-
-  if (fallStatus===1) 
-  {
-    const notificationPayload = JSON.stringify({
-      title: 'Fall Detected',
-      body: 'A fall has been detected.',
-    });
-
-    console.log("Here it is",subscriptions[0])
-
-    webpush.sendNotification(subscriptions[0],JSON.stringify(notificationPayload))
-
-    // Send the push notification to all stored subscriptions
-    // Promise.all(subscriptions.map(sub => webpush.sendNotification(
-    //   sub, JSON.stringify(notificationPayload) )))
-    //   .then(() => res.status(200).json({message: 'Newsletter sent successfully.'}))
-    //   .catch(err => {
-    //       console.error("Error sending notification, reason: ", err);
-    //       res.sendStatus(500);
-    //   })
-  } 
+  fall = req.body.fallstatus;
+  io.sockets.emit('fall',fall);
 });
+
 
 app.post('/api/subscribe', (req, res) => {
   subscriptions.push(req.body.subscription);
@@ -136,7 +118,7 @@ app.post('/api/update', (req, res) => {
 
 
 
-server.listen(port, () => {
+server.listen(port,localIP, () => {
   console.log(`Server is running on port ${port}`);
 });
 
