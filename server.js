@@ -4,9 +4,26 @@ const webpush = require('web-push');
 const axios = require('axios');
 const cors = require('cors');
 const socketIo = require('socket.io');
-const localIP = '192.168.1.118';
-//const localIP = '192.168.185.103';
+//const localIP = '192.168.1.118';
+const localIP = '192.168.185.103';
+
+
+
+const vapidKeys = {
+  publicKey: 'BKyb9hW4_7W3znqT1snpqH4zNFmvdBppRBqIOY-n32t18kyfW7j-RBBINg1yIUI-cPF82UQXnK0tuC_0UDEf2Cg',
+  privateKey: '4ZvqZeiuksaGuzcS7Uo9Q12KdI47qwA0FyKkGBhHUTI'
+};
+
+webpush.setVapidDetails(
+  'https://all-in-one-jacket.web.app/',
+  vapidKeys.publicKey,
+  vapidKeys.privateKey
+);
+
+
+
 const fs = require('fs');
+var temp;
 const app = express();
 const port = 3000;
 const server = require('http').createServer(app);
@@ -17,43 +34,42 @@ app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-var temp;
+const subscriptions = []; // Store subscriptions here
 
+app.post('/api/FallDetected', (req, res) => {
+  const fallStatus = req.body.fallstatus;
 
-// const vapidKeys = {
-//   publicKey: 'BKyb9hW4_7W3znqT1snpqH4zNFmvdBppRBqIOY-n32t18kyfW7j-RBBINg1yIUI-cPF82UQXnK0tuC_0UDEf2Cg',
-//   privateKey: '4ZvqZeiuksaGuzcS7Uo9Q12KdI47qwA0FyKkGBhHUTI',
-//   subject:'https://localhost:4200/'
-// };
+  if (fallStatus) {
+    const notificationPayload = JSON.stringify({
+      title: 'Fall Detected',
+      body: 'A fall has been detected.',
+    });
 
-// webpush.setVapidDetails(
-//   vapidKeys.publicKey,
-//   vapidKeys.privateKey,
-//   'mailto:https://localhost:4200/'
-// );
+    // Send the push notification to all stored subscriptions
+    Promise.all(subscriptions.map((subscription) => {
+      return webpush.sendNotification(subscription, notificationPayload)
+        .catch((error) => {
+          console.error('Error sending push notification:', error);
+        });
+    }))
+    .then(() => {
+      res.status(200).json({ success: true });
+    });
+  } else {
+    res.status(200).json({ success: true });
+  }
+});
 
-// app.post('/api/FallDetected',(req,res)=>{
+app.post('/api/subscribe', (req, res) => {
+  subscriptions.push(req.body.subscription);
 
-//   const Discrete = req.fallstatus;
-//   if(Discrete)
-//   {
-//     const notificationPayload = JSON.stringify({
-//       title: 'Fall Detected',
-//       body: 'A fall has been detected.',
-//       //icon: 'notification-icon.png', 
-//     });
-//     webpush.sendNotification(subscription, notificationPayload)
-//       .then(() => {
-//         res.status(200).json({ success: true });
-//       })
-//       .catch((error) => {
-//         console.error('Error sending push notification:', error);
-//         res.status(500).json({ success: false });
-//       });
-//   } else {
-//     res.status(200).json({ success: true });
-//   }
-// })
+  // Store the subscription on your server for later use
+  // You can save it to a database or an in-memory array
+  // Example: subscriptions.push(subscription);
+  console.log(subscriptions);
+  res.status(201).json({ message: 'Subscription received and stored' });
+});
+
 
 
 app.post('/api/OxyHeart', (req, res) => {
@@ -114,15 +130,12 @@ app.post('/api/update', (req, res) => {
   res.status(200).json({ temperature });
 });
 
-app.get('/api/temperature', (req, res) => {
-  res.json({ temp });
-});
 
-app.get('/api/OxyHeart', (req, res) => {
-  res.json({ Heart,Oxygen });
-});
 
-server.listen(port, () => {
+
+
+
+server.listen(port,localIP, () => {
   console.log(`Server is running on port ${port}`);
 });
 
