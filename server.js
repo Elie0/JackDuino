@@ -49,16 +49,16 @@ app.post('/api/FallDetected', (req, res) => {
      
     };
 
-    webpush.sendNotification(subscriptions[0],JSON.stringify(notificationPayload))
+    //webpush.sendNotification(subscriptions[0],JSON.stringify(notificationPayload))
 
-    // Send the push notification to all stored subscriptions
-    // Promise.all(subscriptions.map(sub => webpush.sendNotification(
-    //   sub, JSON.stringify(notificationPayload) )))
-    //   .then(() => res.status(200).json({message: 'Newsletter sent successfully.'}))
-    //   .catch(err => {
-    //       console.error("Error sending notification, reason: ", err);
-    //       res.sendStatus(500);
-    //   })
+   // Send the push notification to all stored subscriptions
+    Promise.all(subscriptions.map(sub => webpush.sendNotification(
+      sub, JSON.stringify(notificationPayload) )))
+      .then(() => res.status(200).json({message: 'Newsletter sent successfully.'}))
+      .catch(err => {
+          console.error("Error sending notification, reason: ", err);
+          res.sendStatus(500);
+      })
   } 
 });
 // var fall
