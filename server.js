@@ -4,8 +4,8 @@ const webpush = require('web-push');
 const axios = require('axios');
 const cors = require('cors');
 const socketIo = require('socket.io');
-const localIP = '192.168.1.118';
-//const localIP = '192.168.185.103';
+//const localIP = '192.168.1.118';
+const localIP = '192.168.185.103';
 
 
 
@@ -15,7 +15,7 @@ const vapidKeys = {
 };
 
 webpush.setVapidDetails(
-  'https://all-in-one-jacket.web.app/',
+  'mailto:example@yourdomain.org',
   vapidKeys.publicKey,
   vapidKeys.privateKey
 );
@@ -36,11 +36,37 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 const subscriptions = []; // Store subscriptions here
 
-var fall
 app.post('/api/FallDetected', (req, res) => {
-  fall = req.body.fallstatus;
-  io.sockets.emit('fall',fall);
+  const fallStatus = req.body.fallstatus;
+
+  if (fallStatus===1) 
+  {
+    const notificationPayload ={
+      notification: {
+        title: 'Fall Detected',
+        body: 'A fall has been detected.'
+      } 
+     
+    };
+
+    webpush.sendNotification(subscriptions[0],JSON.stringify(notificationPayload))
+
+    // Send the push notification to all stored subscriptions
+    // Promise.all(subscriptions.map(sub => webpush.sendNotification(
+    //   sub, JSON.stringify(notificationPayload) )))
+    //   .then(() => res.status(200).json({message: 'Newsletter sent successfully.'}))
+    //   .catch(err => {
+    //       console.error("Error sending notification, reason: ", err);
+    //       res.sendStatus(500);
+    //   })
+  } 
 });
+// var fall
+// app.post('/api/FallDetected', (req, res) => {
+//   fall = req.body.fallstatus;
+//   io.sockets.emit('fall',fall);
+//   res.status(200).json({ fall});
+// });
 
 
 app.post('/api/subscribe', (req, res) => {
