@@ -45,17 +45,18 @@ app.post('/api/FallDetected', (req, res) => {
       title: 'Fall Detected',
       body: 'A fall has been detected.',
     });
+    console.log(notificationPayload);
 
-   console.log(webpush.sendNotification(subscriptions[0])) 
+  //  console.log(webpush.sendNotification(subscriptions[0])) 
 
-    // Send the push notification to all stored subscriptions
-    Promise.all(subscriptions.map(sub => webpush.sendNotification(
-      sub, JSON.stringify(notificationPayload) )))
-      .then(() => res.status(200).json({message: 'Newsletter sent successfully.'}))
-      .catch(err => {
-          console.error("Error sending notification, reason: ", err);
-          res.sendStatus(500);
-      })
+  //   // Send the push notification to all stored subscriptions
+  //   Promise.all(subscriptions.map(sub => webpush.sendNotification(
+  //     sub, JSON.stringify(notificationPayload) )))
+  //     .then(() => res.status(200).json({message: 'Newsletter sent successfully.'}))
+  //     .catch(err => {
+  //         console.error("Error sending notification, reason: ", err);
+  //         res.sendStatus(500);
+  //     })
   } 
 });
 
