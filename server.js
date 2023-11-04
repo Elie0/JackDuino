@@ -46,6 +46,8 @@ app.post('/api/FallDetected', (req, res) => {
       body: 'A fall has been detected.',
     });
 
+    console.log("Here it is",subscriptions[0])
+
     webpush.sendNotification(subscriptions[0],JSON.stringify(notificationPayload))
 
     // Send the push notification to all stored subscriptions
