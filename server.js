@@ -39,7 +39,7 @@ const subscriptions = []; // Store subscriptions here
 app.post('/api/FallDetected', (req, res) => {
   const fallStatus = req.body.fallstatus;
 
-  if (fallStatus) 
+  if (fallStatus===1) 
   {
     const notificationPayload = JSON.stringify({
       title: 'Fall Detected',
@@ -47,16 +47,16 @@ app.post('/api/FallDetected', (req, res) => {
     });
     console.log(notificationPayload);
 
-  //  console.log(webpush.sendNotification(subscriptions[0])) 
+   console.log(webpush.sendNotification(subscriptions[0])) 
 
-  //   // Send the push notification to all stored subscriptions
-  //   Promise.all(subscriptions.map(sub => webpush.sendNotification(
-  //     sub, JSON.stringify(notificationPayload) )))
-  //     .then(() => res.status(200).json({message: 'Newsletter sent successfully.'}))
-  //     .catch(err => {
-  //         console.error("Error sending notification, reason: ", err);
-  //         res.sendStatus(500);
-  //     })
+    // Send the push notification to all stored subscriptions
+    Promise.all(subscriptions.map(sub => webpush.sendNotification(
+      sub, JSON.stringify(notificationPayload) )))
+      .then(() => res.status(200).json({message: 'Newsletter sent successfully.'}))
+      .catch(err => {
+          console.error("Error sending notification, reason: ", err);
+          res.sendStatus(500);
+      })
   } 
 });
 
