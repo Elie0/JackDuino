@@ -1,8 +1,17 @@
 const express = require('express');
 const bodyParser = require('body-parser');
+const webpush = require('web-push');
+const axios = require('axios');
 const cors = require('cors');
+const socketIo = require('socket.io');
+const localIP = '192.168.1.118';
+//const localIP = '192.168.185.103';
+const fs = require('fs');
 const app = express();
 const port = 3000;
+const server = require('http').createServer(app);
+const io = require('socket.io')(server);
+io.on('connection', () => { /* … */ });
 
 app.use(cors());
 app.use(bodyParser.json());
@@ -10,19 +19,147 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 var temp;
 
-app.post('/api/update', (req, res) =>  {
+
+// const vapidKeys = {
+//   publicKey: 'BKyb9hW4_7W3znqT1snpqH4zNFmvdBppRBqIOY-n32t18kyfW7j-RBBINg1yIUI-cPF82UQXnK0tuC_0UDEf2Cg',
+//   privateKey: '4ZvqZeiuksaGuzcS7Uo9Q12KdI47qwA0FyKkGBhHUTI',
+//   subject:'https://localhost:4200/'
+// };
+
+// webpush.setVapidDetails(
+//   vapidKeys.publicKey,
+//   vapidKeys.privateKey,
+//   'mailto:https://localhost:4200/'
+// );
+
+// app.post('/api/FallDetected',(req,res)=>{
+
+//   const Discrete = req.fallstatus;
+//   if(Discrete)
+//   {
+//     const notificationPayload = JSON.stringify({
+//       title: 'Fall Detected',
+//       body: 'A fall has been detected.',
+//       //icon: 'notification-icon.png', 
+//     });
+//     webpush.sendNotification(subscription, notificationPayload)
+//       .then(() => {
+//         res.status(200).json({ success: true });
+//       })
+//       .catch((error) => {
+//         console.error('Error sending push notification:', error);
+//         res.status(500).json({ success: false });
+//       });
+//   } else {
+//     res.status(200).json({ success: true });
+//   }
+// })
+
+
+app.post('/api/OxyHeart', (req, res) => {
+  const HeartRate = req.body.heartRate;
+  const OxyRate = req.body.spo2;
+  console.log('Received Data:', HeartRate+" hbp ",OxyRate+" % ");
+  io.sockets.emit('dataUpdate',{heartRate: HeartRate, spo2: OxyRate});
+  res.status(200).json({ HeartRate});
+});
+
+app.post('/api/RoomTemp', (req, res) => {
+  const temp = req.body.RoomTemp;
+  console.log('RoomTemp:',temp);
+  io.sockets.emit('roomtempUpdate',temp);
+  res.status(200).json({ temp });
+});
+
+app.post('/api/GraphicalHeart', (req, res) => { 
+  
+  const data = req.body;
+  console.log(data)
+  const filepath = 'C:/Users/eliea/Desktop/All-IN-ONE-JACKET/all-in-one-jacket/src/assets/data.json';
+  fs.readFile(filepath, 'utf8', (err, fileContent) => {
+    if (err) {
+      console.error('Error reading data file:', err);
+      res.status(500).json({ error: 'Failed to read data file' });
+    } else {
+      let jsonDataArray = fileContent.trim().split('\n');
+      // Keep only the latest 20 records
+      if (jsonDataArray.length >= 40) {
+        jsonDataArray = jsonDataArray.slice(jsonDataArray.length - 40);
+      }
+      // Append the new data to the filtered content
+      jsonDataArray.push(JSON.stringify(data));
+      const formattedData = jsonDataArray.join('\n');
+
+      // Write the updated content back to the file
+      fs.writeFile(filepath, formattedData, (err) => {
+        if (err) {
+          console.error('Error saving data:', err);
+          res.status(500).json({ error: 'Failed to save data' });
+        } else {
+          console.log('Data saved to ' + filepath);
+          res.json({ message: 'Data received and saved successfully' });
+        }
+      });
+    }
+  });
+     
+})
+
+app.post('/api/update', (req, res) => {
   const temperature = req.body.temperature;
-  // You can process the temperature data here (e.g., store it in a database)
+  io.sockets.emit('TempUpdate',temperature);
   console.log('Received temperature:', temperature);
   temp = temperature;
+
   res.status(200).json({ temperature });
 });
 
 app.get('/api/temperature', (req, res) => {
-  console.log(temp)
-  res.json({ temp }); 
+  res.json({ temp });
 });
 
-app.listen(port, () => {
+app.get('/api/OxyHeart', (req, res) => {
+  res.json({ Heart,Oxygen });
+});
+
+server.listen(port, () => {
   console.log(`Server is running on port ${port}`);
 });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  // const postData = {
+  //   temperature: temperature,
+  // };
+
+  // const formData = querystring.stringify(postData);
+
+  // const config = {
+  //   headers: {
+  //     'Content-Type': 'application/x-www-form-urlencoded',
+  //   },
+  // };
+
+  // axios
+  //   .post('https://data-server.cyclic.cloud/api/update', formData, config)
+  //   .then((response) => {
+  //     console.log('Server response:', response.data);
+  //   })
+  //   .catch((error) => {
+  //     console.error('Error:', error.message);
+  //   });
