@@ -1,9 +1,9 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const webpush = require('web-push');
-const axios = require('axios');
+const admin = require("firebase-admin")
+const credentials = require('./key.json')
 const cors = require('cors');
-const socketIo = require('socket.io');
 //const localIP = '192.168.1.118';
 const localIP = '192.168.185.103';
 
@@ -20,9 +20,16 @@ webpush.setVapidDetails(
   vapidKeys.privateKey
 );
 
+admin.initializeApp({
+  credential:admin.credential.cert(credentials)
+});
+
+const db = admin.firestore();
+
 
 
 const fs = require('fs');
+const { error } = require('console');
 var temp;
 const app = express();
 const port = 3000;
@@ -49,9 +56,7 @@ app.post('/api/FallDetected', (req, res) => {
      
     };
 
-    //webpush.sendNotification(subscriptions[0],JSON.stringify(notificationPayload))
 
-   // Send the push notification to all stored subscriptions
     Promise.all(subscriptions.map(sub => webpush.sendNotification(
       sub, JSON.stringify(notificationPayload) )))
       .then(() => res.status(200).json({message: 'Newsletter sent successfully.'}))
@@ -61,15 +66,9 @@ app.post('/api/FallDetected', (req, res) => {
       })
   } 
 });
-// var fall
-// app.post('/api/FallDetected', (req, res) => {
-//   fall = req.body.fallstatus;
-//   io.sockets.emit('fall',fall);
-//   res.status(200).json({ fall});
-// });
 
 
-app.post('/api/subscribe', (req, res) => {
+app.post('/api/subscribe',  (req, res) => {
   subscriptions.push(req.body.subscription);
 
   // Store the subscription on your server for later use
@@ -78,6 +77,47 @@ app.post('/api/subscribe', (req, res) => {
   console.log(subscriptions);
   res.status(201).json({ message: 'Subscription received and stored' });
 });
+
+
+app.post('/api/CreateFall',async(req,res)=>{
+
+  try{
+    const data = {
+      fall: req.body.fallstatus
+    };
+    const response = await db.collection("Falls").add(data);
+    res.send(response);
+  }catch(err){
+    res.send(error)
+  }
+
+})
+
+app.get ('/api/ReadFall',async(req,res)=>{
+  try{
+    const usersRef = db.collection("Falls");
+    const response = await usersRef.get();
+    let responses = [];
+    response.forEach((fall)=>{
+      responses.push(fall.data())
+    })
+    res.send(responses)
+  }
+  catch(err){
+    res.send(err)
+  }
+})
+
+app.get ('/api/ReadFall/:id',async(req,res)=>{
+  try{
+    const usersRef = db.collection("Falls").doc(req.params.id);
+    const response = await usersRef.get();
+    res.send(response.data())
+  }
+  catch(err){
+    res.send(err)
+  }
+})
 
 
 
