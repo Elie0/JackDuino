@@ -219,7 +219,7 @@ app.post('/api/update', (req, res) => {
 
 
 
-server.listen(port, () => {
+server.listen( () => {
   console.log(`Server is running on port ${port}`);
 });
 
