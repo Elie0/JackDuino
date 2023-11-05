@@ -32,6 +32,9 @@ const fs = require('fs');
 const { error } = require('console');
 var temp;
 const app = express();
+app.use(cors());
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 const port = 3000;
 const server = require('http').createServer(app);
 const io = require('socket.io')(server);
@@ -63,36 +66,34 @@ app.post('/api/FallDetected', async (req, res) => {
   }
 });
 
-app.use(cors());
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
+
 
 const subscriptions = []; // Store subscriptions here
 
-app.post('/api/FallDetected', async (req, res) => {
-  const fallStatus = req.body.fallstatus;
+  app.post('/api/FallDetected', async (req, res) => {
+    const fallStatus = req.body.fallstatus;
 
-  if (fallStatus === 1) {
-    const notificationPayload = {
-      notification: {
-        title: 'Fall Detected',
-        body: 'A fall has been detected.'
+    if (fallStatus === 1) {
+      const notificationPayload = {
+        notification: {
+          title: 'Fall Detected',
+          body: 'A fall has been detected.'
+        }
+      };
+
+      try {
+        const subscribers = await fetchSubscribersFromDatabase();
+
+        // Send notifications to subscribers
+        await Promise.all(subscribers.map(sub => webpush.sendNotification(sub, JSON.stringify(notificationPayload))))
+
+        res.status(200).json({ message: 'Notifications sent successfully.' });
+      } catch (err) {
+        console.error("Error sending notifications:", err);
+        res.sendStatus(500);
       }
-    };
-
-    try {
-      const subscribers = await fetchSubscribersFromDatabase();
-
-      // Send notifications to subscribers
-      await Promise.all(subscribers.map(sub => webpush.sendNotification(sub, JSON.stringify(notificationPayload))))
-
-      res.status(200).json({ message: 'Notifications sent successfully.' });
-    } catch (err) {
-      console.error("Error sending notifications:", err);
-      res.sendStatus(500);
     }
-  }
-});
+  });
 
 
 app.post('/api/subscribe', async (req, res) => {
