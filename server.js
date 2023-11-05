@@ -30,6 +30,7 @@ app.use(cors());
 app.use(cors({ origin: 'https://all-in-one-jacket.web.app' }));
 const port = 3000;
 const server = require('http').createServer(app);
+io.origins(['https://all-in-one-jacket.web.app']);
 const io = require('socket.io')(server);
 io.on('connection', () => { /* … */ });
 
