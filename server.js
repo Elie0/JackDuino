@@ -3,7 +3,6 @@ const bodyParser = require('body-parser');
 const webpush = require('web-push');
 const admin = require("firebase-admin")
 const credentials = require('./key.json')
-const io = require('socket.io')
 const cors = require('cors');
 //const localIP = '192.168.1.118';
 const localIP = '192.168.185.103';
@@ -30,22 +29,14 @@ const app = express();
 app.use(cors());
 const port = 3000;
 const server = require('http').Server(app);
-const socketio = new io.Server(server,{
+const io = require("socket.io")(server,{
   cors: {
-    origin: "*",
-    handlePreflightRequest: (req, res) => {
-      const headers = {
-        "Access-Control-Allow-Headers": "Content-Type, Authorization",
-        "Access-Control-Allow-Origin": "*",
-        "Access-Control-Allow-Credentials": true,
-        "Access-Control-Allow-Methods": "GET, POST, OPTIONS, HEAD"
-      };
-      res.writeHead(200, headers);
-      res.end();
-    }
+    origin: "https://jackback.onrender.com",
   }
 });
-socketio.on('connection', () => { /* … */ });
+io.on('connection', () => (socket)=>{
+  console.log("client connected",socket.id)
+});
 
 
 app.use(bodyParser.json());
@@ -111,7 +102,7 @@ app.get ('/api/ReadFall',async(req,res)=>{
     response.forEach((fall)=>{
       responses.push(fall.data())
     })
-    res.send(response)
+    res.send(responses)
   }
   catch(err){
     res.send(err)
@@ -233,7 +224,7 @@ app.post('/api/update', (req, res) => {
 
 
 
-server.listen( () => {
+server.listen( port, () => {
   console.log(`Server is running on port ${port}`);
 });
 
