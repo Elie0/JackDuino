@@ -147,7 +147,7 @@ app.post('/api/FallDetected', async (req, res) => {
 
 async function fetchSubscribersFromDatabase() {
   try{
-    console.log("reached!")
+    console.log("reached Step!!!!")
     const usersRef = db.collection("Falls");
     const response = await usersRef.get();
     let responses  = [];
