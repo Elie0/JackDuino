@@ -32,8 +32,16 @@ const port = 3000;
 const server = require('http').createServer(app);
 const socketio = new io.Server(server,{
   cors:{
-    origin: "https://all-in-one-jacket.web.app/",
-    methods: ["GET", "POST"]
+    origin: ["*"],
+    handlePreflightRequest: (req, res) => {
+      const headers = {
+          "Access-Control-Allow-Headers": "Content-Type, Authorization",
+          "Access-Control-Allow-Origin": "https://all-in-one-jacket.web.app/",
+          "Access-Control-Allow-Credentials": true,
+          "Access-Control-Allow-Methods": "GET, POST, OPTIONS, HEAD"
+      };
+      res.writeHead(200, headers);
+      res.end();
   }
 });
 socketio.on('connection', () => { /* … */ });
