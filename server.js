@@ -29,7 +29,7 @@ const fs = require('fs');
 const app = express();
 app.use(cors());
 const port = 3000;
-const server = require('http').createServer(app);
+const server = require('http').Server(app);
 const socketio = new io.Server(server,{
   cors: {
     origin: "*",
@@ -45,7 +45,7 @@ const socketio = new io.Server(server,{
     }
   }
 });
-//socketio.on('connection', () => { /* … */ });
+socketio.on('connection', () => { /* … */ });
 
 
 app.use(bodyParser.json());
