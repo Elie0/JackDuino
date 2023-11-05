@@ -111,8 +111,10 @@ app.post('/api/subscribe', async (req, res) => {
 
 async function fetchSubscribersFromDatabase() {
   try{
+    console.log("reached!")
     const usersRef = db.collection("Falls");
     const response = await usersRef.get();
+    console.log(response)
     return(response)
   }
   catch(err){
