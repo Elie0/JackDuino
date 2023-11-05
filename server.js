@@ -7,8 +7,6 @@ const cors = require('cors');
 //const localIP = '192.168.1.118';
 const localIP = '192.168.185.103';
 
-
-
 const vapidKeys = {
   publicKey: 'BKyb9hW4_7W3znqT1snpqH4zNFmvdBppRBqIOY-n32t18kyfW7j-RBBINg1yIUI-cPF82UQXnK0tuC_0UDEf2Cg',
   privateKey: '4ZvqZeiuksaGuzcS7Uo9Q12KdI47qwA0FyKkGBhHUTI'
@@ -26,13 +24,10 @@ admin.initializeApp({
 
 const db = admin.firestore();
 
-
-
 const fs = require('fs');
-const { error } = require('console');
-var temp;
 const app = express();
 app.use(cors());
+app.use(cors({ origin: 'https://all-in-one-jacket.web.app' }));
 const port = 3000;
 const server = require('http').createServer(app);
 const io = require('socket.io')(server);
