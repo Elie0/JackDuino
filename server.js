@@ -36,7 +36,7 @@ const socketio = new io.Server(server,{
     methods: ["GET", "POST"]
   }
 });
-io.on('connection', () => { /* … */ });
+socketio.on('connection', () => { /* … */ });
 
 
 app.use(bodyParser.json());
