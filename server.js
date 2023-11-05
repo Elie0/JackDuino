@@ -27,12 +27,12 @@ const db = admin.firestore();
 const fs = require('fs');
 const app = express();
 app.use(cors());
-app.use(cors({ origin: 'https://all-in-one-jacket.web.app' }));
 const port = 3000;
 const server = require('http').createServer(app);
 const io = require('socket.io')(server,{
   cors:{
-    origin:'*'
+    origin: "https://all-in-one-jacket.web.app/",
+    methods: ["GET", "POST"]
   }
 });
 io.on('connection', () => { /* … */ });
