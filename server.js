@@ -234,34 +234,3 @@ server.listen(  () => {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-  // const postData = {
-  //   temperature: temperature,
-  // };
-
-  // const formData = querystring.stringify(postData);
-
-  // const config = {
-  //   headers: {
-  //     'Content-Type': 'application/x-www-form-urlencoded',
-  //   },
-  // };
-
-  // axios
-  //   .post('https://data-server.cyclic.cloud/api/update', formData, config)
-  //   .then((response) => {
-  //     console.log('Server response:', response.data);
-  //   })
-  //   .catch((error) => {
-  //     console.error('Error:', error.message);
-  //   });
