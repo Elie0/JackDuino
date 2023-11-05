@@ -31,7 +31,7 @@ const port = 3000;
 const server = require('http').Server(app);
 const io = require("socket.io")(server,{
   cors: {
-    origin: "https://jackback.onrender.com",
+    origin: "https://all-in-one-jacket.web.app/",
   }
 });
 io.on('connection', () => (socket)=>{
