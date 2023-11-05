@@ -45,7 +45,7 @@ const socketio = new io.Server(server,{
     }
   }
 });
-socketio.on('connection', () => { /* … */ });
+//socketio.on('connection', () => { /* … */ });
 
 
 app.use(bodyParser.json());
