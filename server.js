@@ -37,46 +37,99 @@ const server = require('http').createServer(app);
 const io = require('socket.io')(server);
 io.on('connection', () => { /* … */ });
 
+app.post('/api/FallDetected', async (req, res) => {
+  const fallStatus = req.body.fallstatus;
+
+  if (fallStatus === 1) {
+    const notificationPayload = {
+      notification: {
+        title: 'Fall Detected',
+        body: 'A fall has been detected.'
+      }
+    };
+
+    try {
+      // Fetch subscribers from your database (e.g., Firestore, MongoDB, etc.)
+      const subscribers = await fetchSubscribersFromDatabase();
+
+      // Send notifications to subscribers
+      await Promise.all(subscribers.map(sub => webpush.sendNotification(sub, JSON.stringify(notificationPayload))))
+
+      res.status(200).json({ message: 'Notifications sent successfully.' });
+    } catch (err) {
+      console.error("Error sending notifications:", err);
+      res.sendStatus(500);
+    }
+  }
+});
+
 app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 const subscriptions = []; // Store subscriptions here
 
-app.post('/api/FallDetected', (req, res) => {
+app.post('/api/FallDetected', async (req, res) => {
   const fallStatus = req.body.fallstatus;
 
-  if (fallStatus===1) 
-  {
-    const notificationPayload ={
+  if (fallStatus === 1) {
+    const notificationPayload = {
       notification: {
         title: 'Fall Detected',
         body: 'A fall has been detected.'
-      } 
-     
+      }
     };
 
+    try {
+      const subscribers = await fetchSubscribersFromDatabase();
 
-    Promise.all(subscriptions.map(sub => webpush.sendNotification(
-      sub, JSON.stringify(notificationPayload) )))
-      .then(() => res.status(200).json({message: 'Newsletter sent successfully.'}))
-      .catch(err => {
-          console.error("Error sending notification, reason: ", err);
-          res.sendStatus(500);
-      })
-  } 
+      // Send notifications to subscribers
+      await Promise.all(subscribers.map(sub => webpush.sendNotification(sub, JSON.stringify(notificationPayload))))
+
+      res.status(200).json({ message: 'Notifications sent successfully.' });
+    } catch (err) {
+      console.error("Error sending notifications:", err);
+      res.sendStatus(500);
+    }
+  }
 });
 
 
-app.post('/api/subscribe',  (req, res) => {
-  subscriptions.push(req.body.subscription);
+app.post('/api/subscribe', async (req, res) => {
+  try{
+    const data = {
+      subscriber: req.body.subscription
+    };
+    const response = await db.collection("Subscribers").add(data);
+    res.send(response);
+  }catch(err){
+    res.send(error)
+  }
 
-  // Store the subscription on your server for later use
-  // You can save it to a database or an in-memory array
-  // Example: subscriptions.push(subscription);
-  console.log(subscriptions);
-  res.status(201).json({ message: 'Subscription received and stored' });
 });
+
+async function fetchSubscribersFromDatabase() {
+  try{
+    const usersRef = db.collection("Falls");
+    const response = await usersRef.get();
+    return(response)
+  }
+  catch(err){
+    console.log(err)
+  }
+}
+
+app.get ('/api/subscriptions',async(req,res)=>{
+  try{
+    const usersRef = db.collection("Subscribers");
+    const response = await usersRef.get();
+    res.send(response)
+  }
+  catch(err){
+    res.send(err)
+  }
+})
+
 
 
 app.post('/api/CreateFall',async(req,res)=>{
@@ -86,6 +139,20 @@ app.post('/api/CreateFall',async(req,res)=>{
       fall: req.body.fallstatus
     };
     const response = await db.collection("Falls").add(data);
+    res.send(response);
+  }catch(err){
+    res.send(error)
+  }
+
+})
+
+app.post('/api/AddSubscriber',async(req,res)=>{
+
+  try{
+    const data = {
+      subscriber: req.body.subscription
+    };
+    const response = await db.collection("Subscribers").add(data);
     res.send(response);
   }catch(err){
     res.send(error)
