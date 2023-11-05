@@ -3,6 +3,7 @@ const bodyParser = require('body-parser');
 const webpush = require('web-push');
 const admin = require("firebase-admin")
 const credentials = require('./key.json')
+const io = require('socket.io')
 const cors = require('cors');
 //const localIP = '192.168.1.118';
 const localIP = '192.168.185.103';
@@ -29,7 +30,7 @@ const app = express();
 app.use(cors());
 const port = 3000;
 const server = require('http').createServer(app);
-const io = require('socket.io')(server,{
+const socketio = new io.Server(server,{
   cors:{
     origin: "https://all-in-one-jacket.web.app/",
     methods: ["GET", "POST"]
