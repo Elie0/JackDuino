@@ -131,37 +131,60 @@ app.get ('/api/ReadFall/:id',async(req,res)=>{
 
 
 async function fetchSubscribersFromDatabase() {
-  try{
-    console.log("reached Step!!!!")
+  try {
     const usersRef = db.collection("subscribers");
     const response = await usersRef.get();
-    let responses  = [];
-    response.forEach((fall)=>{
-      responses.push(fall.data())
-    })
-    console.log(responses)
-    return(responses)
-  }
-  catch(err){
-    console.log(err)
+    let responses = [];
+
+    response.forEach((subscriptionDoc) => {
+      const subscriptionData = subscriptionDoc.data();
+      // Transform Firestore subscription data into plain JavaScript objects
+      const transformedSubscription = {
+        subscriber: {
+          endpoint: subscriptionData.subscriber.endpoint,
+          expirationTime: subscriptionData.subscriber.expirationTime,
+          keys: {
+            p256dh: subscriptionData.subscriber.keys.p256dh,
+            auth: subscriptionData.subscriber.keys.auth
+          }
+        }
+      };
+      responses.push(transformedSubscription);
+    });
+
+    return responses;
+  } catch (err) {
+    console.log(err);
   }
 }
 
+
 app.get ('/api/subscriptions',async(req,res)=>{
 
-  try{
-    console.log("reached Step!!!!")
+  try {
     const usersRef = db.collection("subscribers");
     const response = await usersRef.get();
-    let responses  = [];
-    response.forEach((fall)=>{
-      responses.push(fall.data())
-    })
-    console.log(responses)
-     res.send(responses)
-  }
-  catch(err){
-    console.log(err)
+    let responses = [];
+
+    response.forEach((subscriptionDoc) => {
+      const subscriptionData = subscriptionDoc.data();
+      // Transform Firestore subscription data into plain JavaScript objects
+      const transformedSubscription = {
+        subscriber: {
+          endpoint: subscriptionData.subscriber.endpoint,
+          expirationTime: subscriptionData.subscriber.expirationTime,
+          keys: {
+            p256dh: subscriptionData.subscriber.keys.p256dh,
+            auth: subscriptionData.subscriber.keys.auth
+          }
+        }
+      };
+      responses.push(transformedSubscription);
+    });
+
+    res.send(responses);
+  } catch (err) {
+    res.send(err);
   }
 
 })
