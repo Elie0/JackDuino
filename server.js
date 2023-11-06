@@ -3,6 +3,7 @@ const bodyParser = require('body-parser');
 const webpush = require('web-push');
 const admin = require("firebase-admin")
 const credentials = require('./key.json')
+const axios = require('axios')
 const cors = require('cors');
 //const localIP = '192.168.1.118';
 const localIP = '192.168.185.103';
@@ -47,6 +48,8 @@ const subscriptions = []; // Store subscriptions here
 
 app.post('/api/FallDetected', async (req, res) => {
   const fallStatus = req.body.fallstatus;
+  const getSubscriptionsUrl = "https://jackback.onrender.com/api/subscriptions"
+  const subs = [];
 
   if (fallStatus === 1) {
     const notificationPayload = {
@@ -57,11 +60,17 @@ app.post('/api/FallDetected', async (req, res) => {
     };
 
     try {
-      const subscribers = await fetchSubscribersFromDatabase();
 
-      // Send notifications to subscribers
-      console.log("SUBSCRIBERS:",subscribers)
-      await Promise.all(subscribers.map(sub => webpush.sendNotification(sub, JSON.stringify(notificationPayload))))
+      axios.get(getSubscriptionsUrl).then((res)=>{
+
+        subs = res.data;
+        console.log("SUBSCRIBERS:",subs)
+      })
+      
+      
+
+    
+      await Promise.all(subs.map(sub => webpush.sendNotification(sub, JSON.stringify(notificationPayload))))
 
 
       res.status(200).json({ message: 'Notifications sent successfully.' });
@@ -129,62 +138,21 @@ app.get ('/api/ReadFall/:id',async(req,res)=>{
 })
 
 
-
-async function fetchSubscribersFromDatabase() {
-  try {
-    const usersRef = db.collection("subscribers");
-    const response = await usersRef.get();
-    let responses = [];
-
-    response.forEach((subscriptionDoc) => {
-      const subscriptionData = subscriptionDoc.data();
-      // Transform Firestore subscription data into plain JavaScript objects
-      const transformedSubscription = {
-        subscriber: {
-          endpoint: subscriptionData.subscriber.endpoint,
-          expirationTime: subscriptionData.subscriber.expirationTime,
-          keys: {
-            p256dh: subscriptionData.subscriber.keys.p256dh,
-            auth: subscriptionData.subscriber.keys.auth
-          }
-        }
-      };
-      responses.push(transformedSubscription);
-    });
-
-    return responses;
-  } catch (err) {
-    console.log(err);
-  }
-}
-
-
 app.get ('/api/subscriptions',async(req,res)=>{
 
-  try {
+  try{
+    console.log("reached Step!!!!")
     const usersRef = db.collection("subscribers");
     const response = await usersRef.get();
-    let responses = [];
-
-    response.forEach((subscriptionDoc) => {
-      const subscriptionData = subscriptionDoc.data();
-      // Transform Firestore subscription data into plain JavaScript objects
-      const transformedSubscription = {
-        subscriber: {
-          endpoint: subscriptionData.subscriber.endpoint,
-          expirationTime: subscriptionData.subscriber.expirationTime,
-          keys: {
-            p256dh: subscriptionData.subscriber.keys.p256dh,
-            auth: subscriptionData.subscriber.keys.auth
-          }
-        }
-      };
-      responses.push(transformedSubscription);
-    });
-
-    res.send(responses);
-  } catch (err) {
-    res.send(err);
+    let responses  = [];
+    response.forEach((sub)=>{
+      responses.push(sub.data())
+    })
+    console.log(responses)
+     res.json(responses)
+  }
+  catch(err){
+    console.log(err)
   }
 
 })
