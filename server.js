@@ -48,8 +48,17 @@ const subscriptions = []; // Store subscriptions here
 
 app.post('/api/FallDetected', async (req, res) => {
   const fallStatus = req.body.fallstatus;
-  const getSubscriptionsUrl = "https://jackback.onrender.com/api/subscriptions"
-  let subs = [];
+  const apiUrl = 'https://jackback.onrender.com/api/subscriptions'; 
+  const dataArray = [];
+
+axios.get(apiUrl)
+  .then((response) => {
+    dataArray.push(response.data);
+    console.log('Data has been fetched and stored in dataArray:', dataArray);
+  })
+  .catch((error) => {
+    console.error('Error fetching data:', error);
+  });
 
   if (fallStatus === 1) {
     const notificationPayload = {
@@ -60,14 +69,8 @@ app.post('/api/FallDetected', async (req, res) => {
     };
 
     try {
-
-      axios.get(getSubscriptionsUrl).then((res)=>{
-
-        subs.push(res.data);
-        console.log("SUBSCRIBERS:",subs)
-      })
-    
-      await Promise.all(subs.map(sub => webpush.sendNotification(sub, JSON.stringify(notificationPayload))))
+      
+      await Promise.all(dataArray.map(sub => webpush.sendNotification(sub, JSON.stringify(notificationPayload))))
 
 
       res.status(200).json({ message: 'Notifications sent successfully.' });
@@ -142,11 +145,11 @@ app.get ('/api/subscriptions',async(req,res)=>{
     const usersRef = db.collection("subscribers");
     const response = await usersRef.get();
     let responses  = [];
-    response.forEach((sub)=>{
-      responses.push(sub.data())
+    response.forEach((fall)=>{
+      responses.push(fall.data())
     })
-    console.log(res.json(responses))
-     res.json(responses)
+    console.log(responses)
+     res.send(responses)
   }
   catch(err){
     console.log(err)
