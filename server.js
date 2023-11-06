@@ -49,7 +49,7 @@ const subscriptions = []; // Store subscriptions here
 app.post('/api/FallDetected', async (req, res) => {
   const fallStatus = req.body.fallstatus;
   const getSubscriptionsUrl = "https://jackback.onrender.com/api/subscriptions"
-  const subs = [];
+  let subs = [];
 
   if (fallStatus === 1) {
     const notificationPayload = {
@@ -63,12 +63,9 @@ app.post('/api/FallDetected', async (req, res) => {
 
       axios.get(getSubscriptionsUrl).then((res)=>{
 
-        subs = res.data;
+        subs.push(res.data);
         console.log("SUBSCRIBERS:",subs)
       })
-      
-      
-
     
       await Promise.all(subs.map(sub => webpush.sendNotification(sub, JSON.stringify(notificationPayload))))
 
@@ -148,7 +145,7 @@ app.get ('/api/subscriptions',async(req,res)=>{
     response.forEach((sub)=>{
       responses.push(sub.data())
     })
-    console.log(responses)
+    console.log(res.json(responses))
      res.json(responses)
   }
   catch(err){
