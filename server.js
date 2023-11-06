@@ -93,11 +93,40 @@ app.get ('/api/subscriptions',async(req,res)=>{
 
 })
 
+
+app.post('/api/subscribe',  async (req, res) => {
+
+  try{
+    const data =  req.body.subscription
+    const response = await db.collection("subscribers").add(data);
+    res.send(response);
+  }catch(err){
+    res.send(error)
+  }
+
+
+});
+
+
+app.post('/api/CreateFall',async(req,res)=>{
+
+  try{
+    const data = req.body.fallstatus
+    
+    const response = await db.collection("Falls").add(data);
+    res.send(response);
+  }catch(err){
+    res.send(error)
+  }
+
+})
+
 async function fetchSubscribersFromDatabase() {
   try{
     console.log("reached Step!!!!")
     const usersRef = db.collection("subscribers");
     const response = await usersRef.get();
+    console.log("res",response)
     let responses  = [];
     response.forEach((fall)=>{
       responses.push(fall.data())
@@ -109,39 +138,6 @@ async function fetchSubscribersFromDatabase() {
     console.log(err)
   }
 }
-
-app.post('/api/subscribe', async (req, res) => {
-  try{
-    console.log("reached Step!!!!")
-    const usersRef = db.collection("subscribers");
-    const response = await usersRef.get();
-    let responses  = [];
-    response.forEach((sub)=>{
-      responses.push(sub.data())
-    })
-    console.log(responses)
-     res.send(responses)
-  }
-  catch(err){
-    console.log(err)
-  }
-});
-
-
-
-app.post('/api/CreateFall',async(req,res)=>{
-
-  try{
-    const data = {
-      fall: req.body.fallstatus
-    };
-    const response = await db.collection("Falls").add(data);
-    res.send(response);
-  }catch(err){
-    res.send(error)
-  }
-
-})
 
 app.get ('/api/ReadFall',async(req,res)=>{
   try{
