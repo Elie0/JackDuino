@@ -46,7 +46,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 const subscriptions = []; // Store subscriptions here
 
-app.post('/api/FallDetected', async (req, res) => {
+
  
 app.post('/api/FallDetected', async (req, res) => {
   const fallStatus = req.body.fallstatus;
@@ -61,6 +61,7 @@ app.post('/api/FallDetected', async (req, res) => {
 
     try {
       const subscribers = await fetchSubscribersFromDatabase();
+      console.log(subscribers)
 
       // Send notifications to subscribers
       await Promise.all(subscribers.map(sub => webpush.sendNotification(sub, JSON.stringify(notificationPayload))))
@@ -72,7 +73,7 @@ app.post('/api/FallDetected', async (req, res) => {
     }
   }
 });
-});
+
 
 app.get ('/api/subscriptions',async(req,res)=>{
 
