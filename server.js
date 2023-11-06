@@ -49,7 +49,7 @@ const subscriptions = []; // Store subscriptions here
 app.post('/api/FallDetected', async (req, res) => {
   const fallStatus = req.body.fallstatus;
   const apiUrl = 'https://jackback.onrender.com/api/subscriptions'; 
-  const dataArray = [];
+  var dataArray = [];
 
 axios.get(apiUrl)
   .then((response) => {
