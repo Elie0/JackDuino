@@ -31,7 +31,7 @@ const port = 3000;
 const server = require('http').Server(app);
 const io = require("socket.io")(server,{
   cors: {
-    origin: "https://all-in-one-jacket.web.app",
+    origin: "https://jackback.onrender.com",
   }
 });
 io.on('connection', () => (socket)=>{
@@ -44,39 +44,44 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 const subscriptions = []; // Store subscriptions here
 
-app.post('/api/FallDetected', (req, res) => {
+app.post('/api/FallDetected', async (req, res) => {
   const fallStatus = req.body.fallstatus;
 
-  if (fallStatus===1) 
-  {
-    const notificationPayload ={
+  if (fallStatus === 1) {
+    const notificationPayload = {
       notification: {
         title: 'Fall Detected',
         body: 'A fall has been detected.'
-      } 
-     
+      }
     };
 
+    try {
+      const subscribers = await fetchSubscribersFromDatabase();
 
-    Promise.all(subscriptions.map(sub => webpush.sendNotification(
-      sub, JSON.stringify(notificationPayload) )))
-      .then(() => res.status(200).json({message: 'Newsletter sent successfully.'}))
-      .catch(err => {
-          console.error("Error sending notification, reason: ", err);
-          res.sendStatus(500);
-      })
-  } 
+      // Send notifications to subscribers
+      await Promise.all(subscribers.map(sub => webpush.sendNotification(sub, JSON.stringify(notificationPayload))))
+
+      res.status(200).json({ message: 'Notifications sent successfully.' });
+    } catch (err) {
+      console.error("Error sending notifications:", err);
+      res.sendStatus(500);
+    }
+  }
 });
 
+app.post('/api/subscribe',  async (req, res) => {
 
-app.post('/api/subscribe',  (req, res) => {
-  subscriptions.push(req.body.subscription);
+  try{
+    const data = {
+      subscriber: req.body.subscription
+    };
+    const response = await db.collection("subscribers").add(data);
+    res.send(response);
+  }catch(err){
+    res.send(error)
+  }
 
-  // Store the subscription on your server for later use
-  // You can save it to a database or an in-memory array
-  // Example: subscriptions.push(subscription);
-  console.log(subscriptions);
-  res.status(201).json({ message: 'Subscription received and stored' });
+
 });
 
 
@@ -120,30 +125,7 @@ app.get ('/api/ReadFall/:id',async(req,res)=>{
   }
 })
 
-app.post('/api/FallDetected', async (req, res) => {
-  const fallStatus = req.body.fallstatus;
 
-  if (fallStatus === 1) {
-    const notificationPayload = {
-      notification: {
-        title: 'Fall Detected',
-        body: 'A fall has been detected.'
-      }
-    };
-
-    try {
-      const subscribers = await fetchSubscribersFromDatabase();
-
-      // Send notifications to subscribers
-      await Promise.all(subscribers.map(sub => webpush.sendNotification(sub, JSON.stringify(notificationPayload))))
-
-      res.status(200).json({ message: 'Notifications sent successfully.' });
-    } catch (err) {
-      console.error("Error sending notifications:", err);
-      res.sendStatus(500);
-    }
-  }
-});
 
 async function fetchSubscribersFromDatabase() {
   try{
@@ -161,6 +143,25 @@ async function fetchSubscribersFromDatabase() {
     console.log(err)
   }
 }
+
+app.get ('/api/subscriptions',async(req,res)=>{
+
+  try{
+    console.log("reached Step!!!!")
+    const usersRef = db.collection("Falls");
+    const response = await usersRef.get();
+    let responses  = [];
+    response.forEach((fall)=>{
+      responses.push(fall.data())
+    })
+    console.log(responses)
+     res.send(responses)
+  }
+  catch(err){
+    console.log(err)
+  }
+
+})
 app.post('/api/OxyHeart', (req, res) => {
   const HeartRate = req.body.heartRate;
   const OxyRate = req.body.spo2;
