@@ -48,43 +48,36 @@ const subscriptions = []; // Store subscriptions here
 
 app.post('/api/FallDetected', async (req, res) => {
   const fallStatus = req.body.fallstatus;
-  const apiUrl = 'https://jackback.onrender.com/api/subscriptions';
-  let dataArray = [];
+  const apiUrl = 'https://jackback.onrender.com/api/subscriptions'; 
+  var dataArray = [];
 
-  try {
-    const response = await fetch(apiUrl);
-    if (response.ok) {
-      const responseData = await response.json();
-      dataArray = responseData.map(subscriber => {
-        const keys = JSON.parse(JSON.stringify(subscriber.subscriber.keys)); // Parse keys object
-        return {
-          subscriber: {
-            ...subscriber.subscriber,
-            keys: keys, // Assign the parsed keys
-          }
-        };
-      });
-      console.log(responseData)
+axios.get(apiUrl)
+  .then((response) => {
+    dataArray = [...dataArray, ...response.data];
+    console.log('Data has been fetched and stored in dataArray:', dataArray);
+  })
+  .catch((error) => {
+    console.error('Error fetching data:', error);
+  });
 
-      if (fallStatus === 1) {
-        const notificationPayload = {
-          notification: {
-            title: 'Fall Detected',
-            body: 'A fall has been detected.'
-          }
-        };
-
-        await Promise.all(dataArray.map(sub => webpush.sendNotification(sub, JSON.stringify(notificationPayload))))
-
-        res.status(200).json({ message: 'Notifications sent successfully.' });
+  if (fallStatus === 1) {
+    const notificationPayload = {
+      notification: {
+        title: 'Fall Detected',
+        body: 'A fall has been detected.'
       }
-    } else {
-      console.error('Error fetching data:', response.status, response.statusText);
+    };
+
+    try {
+      
+      await Promise.all(dataArray.map(sub => webpush.sendNotification(sub, JSON.stringify(notificationPayload))))
+
+
+      res.status(200).json({ message: 'Notifications sent successfully.' });
+    } catch (err) {
+      console.error("Error sending notifications:", err);
       res.sendStatus(500);
     }
-  } catch (error) {
-    console.error('Error fetching data:', error);
-    res.sendStatus(500);
   }
 });
 
@@ -120,10 +113,12 @@ app.post('/api/subscribe', async (req, res) => {
       const data = {
         subscriber: subscriptionData.subscriber
       };
-      subscriptions.push(subscriptionData.subscriber);
-
+      
+      // Save the subscription data
       const response = await db.collection("subscribers").add(data);
-      res.send(response);
+
+      // Return the saved subscription data in the response
+      res.send([data]);
     } else {
       res.status(400).send("Invalid subscription data");
     }
