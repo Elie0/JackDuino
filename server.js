@@ -53,7 +53,7 @@ app.post('/api/FallDetected', async (req, res) => {
 
 axios.get(apiUrl)
   .then((response) => {
-    dataArray.push(response.data);
+    dataArray = [...dataArray, ...response.data];
     console.log('Data has been fetched and stored in dataArray:', dataArray);
   })
   .catch((error) => {
@@ -80,6 +80,25 @@ axios.get(apiUrl)
     }
   }
 });
+
+app.get ('/api/subscriptions',async(req,res)=>{
+
+  try{
+    console.log("reached Step!!!!")
+    const usersRef = db.collection("subscribers");
+    const response = await usersRef.get();
+    let responses  = [];
+    response.forEach((fall)=>{
+      responses.push(fall.data())
+    })
+    console.log(responses)
+     res.send(responses)
+  }
+  catch(err){
+    console.log(err)
+  }
+
+})
 
 app.post('/api/subscribe',  async (req, res) => {
 
@@ -138,24 +157,7 @@ app.get ('/api/ReadFall/:id',async(req,res)=>{
 })
 
 
-app.get ('/api/subscriptions',async(req,res)=>{
 
-  try{
-    console.log("reached Step!!!!")
-    const usersRef = db.collection("subscribers");
-    const response = await usersRef.get();
-    let responses  = [];
-    response.forEach((fall)=>{
-      responses.push(fall.data())
-    })
-    console.log(responses)
-     res.send(responses)
-  }
-  catch(err){
-    console.log(err)
-  }
-
-})
 app.post('/api/OxyHeart', (req, res) => {
   const HeartRate = req.body.heartRate;
   const OxyRate = req.body.spo2;
