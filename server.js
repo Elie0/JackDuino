@@ -102,6 +102,7 @@ app.get ('/api/subscriptions',async(req,res)=>{
 
 app.post('/api/subscribe', async (req, res) => {
   try {
+    console.log(req.body.subscription)
     const subscriptionData = req.body.subscription;
     if (subscriptionData.subscriber && subscriptionData.subscriber.keys) {
       // Ensure the 'keys' field is an object
