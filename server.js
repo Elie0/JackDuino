@@ -130,7 +130,7 @@ app.get ('/api/ReadFall/:id',async(req,res)=>{
 async function fetchSubscribersFromDatabase() {
   try{
     console.log("reached Step!!!!")
-    const usersRef = db.collection("Falls");
+    const usersRef = db.collection("subscribers");
     const response = await usersRef.get();
     let responses  = [];
     response.forEach((fall)=>{
@@ -148,7 +148,7 @@ app.get ('/api/subscriptions',async(req,res)=>{
 
   try{
     console.log("reached Step!!!!")
-    const usersRef = db.collection("Falls");
+    const usersRef = db.collection("subscribers");
     const response = await usersRef.get();
     let responses  = [];
     response.forEach((fall)=>{
