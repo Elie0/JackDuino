@@ -32,6 +32,7 @@ const server = require('http').Server(app);
 const io = require("socket.io")(server,{
   cors: {
     origin: "https://all-in-one-jacket.web.app",
+    //origin: "http://localhost:4200",
   }
 });
 io.on('connection', () => (socket)=>{
@@ -59,7 +60,9 @@ app.post('/api/FallDetected', async (req, res) => {
       const subscribers = await fetchSubscribersFromDatabase();
 
       // Send notifications to subscribers
+      console.log("SUBSCRIBERS:",subscribers)
       await Promise.all(subscribers.map(sub => webpush.sendNotification(sub, JSON.stringify(notificationPayload))))
+
 
       res.status(200).json({ message: 'Notifications sent successfully.' });
     } catch (err) {
