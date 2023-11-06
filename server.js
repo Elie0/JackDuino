@@ -47,18 +47,9 @@ app.use(bodyParser.urlencoded({ extended: true }));
 const subscriptions = []; // Store subscriptions here
 
 app.post('/api/FallDetected', async (req, res) => {
+ 
+app.post('/api/FallDetected', async (req, res) => {
   const fallStatus = req.body.fallstatus;
-  const apiUrl = 'https://jackback.onrender.com/api/subscriptions'; 
-  var dataArray = [];
-
-axios.get(apiUrl)
-  .then((response) => {
-    dataArray = [...dataArray, ...response.data];
-    console.log('Data has been fetched and stored in dataArray:', dataArray);
-  })
-  .catch((error) => {
-    console.error('Error fetching data:', error);
-  });
 
   if (fallStatus === 1) {
     const notificationPayload = {
@@ -69,9 +60,10 @@ axios.get(apiUrl)
     };
 
     try {
-      
-      await Promise.all(dataArray.map(sub => webpush.sendNotification(sub, JSON.stringify(notificationPayload))))
+      const subscribers = await fetchSubscribersFromDatabase();
 
+      // Send notifications to subscribers
+      await Promise.all(subscribers.map(sub => webpush.sendNotification(sub, JSON.stringify(notificationPayload))))
 
       res.status(200).json({ message: 'Notifications sent successfully.' });
     } catch (err) {
@@ -79,6 +71,7 @@ axios.get(apiUrl)
       res.sendStatus(500);
     }
   }
+});
 });
 
 app.get ('/api/subscriptions',async(req,res)=>{
@@ -100,31 +93,37 @@ app.get ('/api/subscriptions',async(req,res)=>{
 
 })
 
+async function fetchSubscribersFromDatabase() {
+  try{
+    console.log("reached Step!!!!")
+    const usersRef = db.collection("subscribers");
+    const response = await usersRef.get();
+    let responses  = [];
+    response.forEach((fall)=>{
+      responses.push(fall.data())
+    })
+    console.log(responses)
+    return(responses)
+  }
+  catch(err){
+    console.log(err)
+  }
+}
+
 app.post('/api/subscribe', async (req, res) => {
-  try {
-    console.log(req.body.subscription)
-    const subscriptionData = req.body.subscription;
-    if (subscriptionData.subscriber && subscriptionData.subscriber.keys) {
-      // Ensure the 'keys' field is an object
-      subscriptionData.subscriber.keys = {
-        auth: subscriptionData.subscriber.keys.auth,
-        p256dh: subscriptionData.subscriber.keys.p256dh
-      };
-
-      const data = {
-        subscriber: subscriptionData.subscriber
-      };
-      
-      // Save the subscription data
-      const response = await db.collection("subscribers").add(data);
-
-      // Return the saved subscription data in the response
-      res.send([data]);
-    } else {
-      res.status(400).send("Invalid subscription data");
-    }
-  } catch (err) {
-    res.status(500).send(err);
+  try{
+    console.log("reached Step!!!!")
+    const usersRef = db.collection("subscribers");
+    const response = await usersRef.get();
+    let responses  = [];
+    response.forEach((sub)=>{
+      responses.push(sub.data())
+    })
+    console.log(responses)
+     res.send(responses)
+  }
+  catch(err){
+    console.log(err)
   }
 });
 

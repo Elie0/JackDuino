@@ -103,9 +103,8 @@ app.get ('/api/subscriptions',async(req,res)=>{
 app.post('/api/subscribe',  async (req, res) => {
 
   try{
-    const data = {
-      subscriber: req.body.subscription
-    };
+    const data = req.body.subscription
+
     const response = await db.collection("subscribers").add(data);
     res.send(response);
   }catch(err){
