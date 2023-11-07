@@ -44,14 +44,28 @@ io.on('connection', () => (socket)=>{
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-const subscriptions = []; // Store subscriptions here
-
-
- 
 app.post('/api/FallDetected', async (req, res) => {
   const fallStatus = req.body.fallstatus;
+  const currentDate =  new Date();
+  const formattedTime = currentDate.toLocaleTimeString();
+  const formattedDate = currentDate.toDateString();
+  const IsoTime = currentDate.toISOString().split('T')[0];
+  console.log(formattedDate+ " " + formattedTime)
+
+  const FallEvent = {
+      IsoDate: IsoTime,
+      Date:formattedDate,
+      Time:formattedTime
+  }
+  try{ const response = await db.collection("Falls").add(FallEvent);
+
+}
+ catch(err){
+  console.log(err)
+}
 
   if (fallStatus === 1) {
+
     const notificationPayload = {
       notification: {
         title: 'Fall Detected',
@@ -61,8 +75,6 @@ app.post('/api/FallDetected', async (req, res) => {
 
     try {
       const subscribers = await fetchSubscribersFromDatabase();
-      console.log(subscribers)
-
       // Send notifications to subscribers
       await Promise.all(subscribers.map(sub => webpush.sendNotification(sub, JSON.stringify(notificationPayload))))
 
@@ -85,7 +97,6 @@ app.get ('/api/subscriptions',async(req,res)=>{
     response.forEach((fall)=>{
       responses.push(fall.data())
     })
-    console.log(responses)
      res.send(responses)
   }
   catch(err){
@@ -127,12 +138,10 @@ async function fetchSubscribersFromDatabase() {
     console.log("reached Step!!!!")
     const usersRef = db.collection("subscribers");
     const response = await usersRef.get();
-    console.log("res",response)
     let responses  = [];
     response.forEach((fall)=>{
       responses.push(fall.data())
     })
-    console.log(responses)
     return(responses)
   }
   catch(err){
@@ -148,6 +157,7 @@ app.get ('/api/ReadFall',async(req,res)=>{
     response.forEach((fall)=>{
       responses.push(fall.data())
     })
+    console.log("Falls",responses)
     res.send(responses)
   }
   catch(err){
@@ -166,7 +176,29 @@ app.get ('/api/ReadFall/:id',async(req,res)=>{
   }
 })
 
+app.get('/api/ReadFall/:StartDate/:EndDate', async (req, res) => {
+  const start = req.params.StartDate;
+  console.log(start);
+  const end = req.params.EndDate;
+  console.log(end);
+  const query = db.collection('Falls')
+    .where('IsoDate', '>=', start)
+    .where('IsoDate', '<=', end);
 
+  try {
+    const getQuery = await query.get();
+    const falls = [];
+
+    getQuery.forEach((doc) => {
+      falls.push(doc.data());
+    });
+
+    res.json(falls);
+  } catch (err) {
+    console.error(err);
+    res.send(err);
+  }
+});
 
 app.post('/api/OxyHeart', (req, res) => {
   const HeartRate = req.body.heartRate;
