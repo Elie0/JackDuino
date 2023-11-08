@@ -18,7 +18,7 @@ webpush.setVapidDetails(
 
 console.log(`${__dirname}/config.env`)
 const dotenv = require('dotenv')
-dotenv.config({ path: `${__dirname}/config.env` });
+dotenv.config({ path: `${__dirname}/Config.env` });
 const admin = require("firebase-admin")
 admin.initializeApp({
   credential: admin.credential.cert({
