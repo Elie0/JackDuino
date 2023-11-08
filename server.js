@@ -1,9 +1,6 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const webpush = require('web-push');
-const admin = require("firebase-admin")
-const credentials = require('./key.json')
-const axios = require('axios')
 const cors = require('cors');
 //const localIP = '192.168.1.118';
 const localIP = '192.168.185.103';
@@ -19,8 +16,16 @@ webpush.setVapidDetails(
   vapidKeys.privateKey
 );
 
+console.log(`${__dirname}/config.env`)
+const dotenv = require('dotenv')
+dotenv.config({ path: `${__dirname}/config.env` });
+const admin = require("firebase-admin")
 admin.initializeApp({
-  credential:admin.credential.cert(credentials)
+  credential: admin.credential.cert({
+      projectId: process.env.FIREBASE_PROJECT_ID,   
+      clientEmail: process.env.FIREBASE_CLIENT_EMAIL,   
+      privateKey: process.env.FIREBASE_PRIVATE_KEY.replace(/\\n/g, '\n')   
+  }),
 });
 
 const db = admin.firestore();
@@ -47,15 +52,19 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.post('/api/FallDetected', async (req, res) => {
   const fallStatus = req.body.fallstatus;
   const currentDate =  new Date();
-  const formattedTime = currentDate.toLocaleTimeString();
+  const formattedTime = currentDate.toLocaleString('en-US',{
+    timeZone:'EET'
+  });
   const formattedDate = currentDate.toDateString();
-  const IsoTime = currentDate.toISOString().split('T')[0];
+  const IsoData = formattedTime.split(',')
+  const Isod = currentDate.toISOString().split('T')[0];
+  const IsoTime = IsoData [1]
   console.log(formattedDate+ " " + formattedTime)
 
   const FallEvent = {
-      IsoDate: IsoTime,
+      IsoDate: Isod,
       Date:formattedDate,
-      Time:formattedTime
+      Time:IsoTime
   }
   try{ const response = await db.collection("Falls").add(FallEvent);
 
@@ -76,7 +85,7 @@ app.post('/api/FallDetected', async (req, res) => {
     try {
       const subscribers = await fetchSubscribersFromDatabase();
       // Send notifications to subscribers
-      await Promise.all(subscribers.map(sub => webpush.sendNotification(sub, JSON.stringify(notificationPayload))))
+     // await Promise.all(subscribers.map(sub => webpush.sendNotification(sub, JSON.stringify(notificationPayload))))
 
       res.status(200).json({ message: 'Notifications sent successfully.' });
     } catch (err) {
@@ -120,19 +129,6 @@ app.post('/api/subscribe',  async (req, res) => {
 });
 
 
-app.post('/api/CreateFall',async(req,res)=>{
-
-  try{
-    const data = req.body.fallstatus
-    
-    const response = await db.collection("Falls").add(data);
-    res.send(response);
-  }catch(err){
-    res.send(error)
-  }
-
-})
-
 async function fetchSubscribersFromDatabase() {
   try{
     console.log("reached Step!!!!")
@@ -165,40 +161,29 @@ app.get ('/api/ReadFall',async(req,res)=>{
   }
 })
 
-app.get ('/api/ReadFall/:id',async(req,res)=>{
-  try{
-    const usersRef = db.collection("Falls").doc(req.params.id);
-    const response = await usersRef.get();
-    res.send(response.data())
-  }
-  catch(err){
-    res.send(err)
-  }
-})
+  app.get('/api/ReadFall/:StartDate/:EndDate', async (req, res) => {
+    const start = req.params.StartDate;
+    console.log(start);
+    const end = req.params.EndDate;
+    console.log(end);
+    const query = db.collection('Falls')
+      .where('IsoDate', '>=', start)
+      .where('IsoDate', '<=', end);
 
-app.get('/api/ReadFall/:StartDate/:EndDate', async (req, res) => {
-  const start = req.params.StartDate;
-  console.log(start);
-  const end = req.params.EndDate;
-  console.log(end);
-  const query = db.collection('Falls')
-    .where('IsoDate', '>=', start)
-    .where('IsoDate', '<=', end);
+    try {
+      const getQuery = await query.get();
+      const falls = [];
 
-  try {
-    const getQuery = await query.get();
-    const falls = [];
+      getQuery.forEach((doc) => {
+        falls.push(doc.data());
+      });
 
-    getQuery.forEach((doc) => {
-      falls.push(doc.data());
-    });
-
-    res.json(falls);
-  } catch (err) {
-    console.error(err);
-    res.send(err);
-  }
-});
+      res.json(falls);
+    } catch (err) {
+      console.error(err);
+      res.send(err);
+    }
+  });
 
 app.post('/api/OxyHeart', (req, res) => {
   const HeartRate = req.body.heartRate;
