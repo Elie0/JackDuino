@@ -20,6 +20,8 @@ console.log(`${__dirname}/config.env`)
 const dotenv = require('dotenv')
 dotenv.config({ path: `${__dirname}/Config.env` });
 const admin = require("firebase-admin")
+console.log(process.env.FIREBASE_PROJECT_ID)
+console.log(process.env.FIREBASE_PRIVATE_KEY)
 admin.initializeApp({
   credential: admin.credential.cert({
       projectId: process.env.FIREBASE_PROJECT_ID,   
