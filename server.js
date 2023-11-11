@@ -16,7 +16,6 @@ webpush.setVapidDetails(
   vapidKeys.privateKey
 );
 
-console.log(`${__dirname}/config.env`)
 const dotenv = require('dotenv')
 dotenv.config({ path: `${__dirname}/Config.env` });
 const admin = require("firebase-admin")
@@ -87,7 +86,7 @@ app.post('/api/FallDetected', async (req, res) => {
     try {
       const subscribers = await fetchSubscribersFromDatabase();
       // Send notifications to subscribers
-     // await Promise.all(subscribers.map(sub => webpush.sendNotification(sub, JSON.stringify(notificationPayload))))
+     //await Promise.all(subscribers.map(sub => webpush.sendNotification(sub, JSON.stringify(notificationPayload))))
 
       res.status(200).json({ message: 'Notifications sent successfully.' });
     } catch (err) {
