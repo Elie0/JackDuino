@@ -31,7 +31,7 @@ admin.initializeApp({
 });
 
 const db = admin.firestore();
-const WebSocket = require('ws');
+//const WebSocket = require('ws');
 const fs = require('fs');
 const app = express();
 app.use(cors());
@@ -47,31 +47,31 @@ io.on('connection', () => (socket)=>{
   console.log("client connected",socket.id)
 });
 //const ws = new WebSocket('ws://192.168.185.100:80'); // Replace with the IP address of your ESP8266
-const ws = new WebSocket('ws://192.168.185.100:80'); 
+// const ws = new WebSocket('ws://192.168.185.100:80'); 
 
-ws.on('open', () => {
-  console.log('Connected to WebSocket server');
-  ws.send('Hello from the client!');
-});
+// ws.on('open', () => {
+//   console.log('Connected to WebSocket server');
+//   ws.send('Hello from the client!');
+// });
 
-ws.on('message', (data) => {
-  const decodedString = data.toString('utf-8');
-  const values = decodedString.split(',')
- // console.log('Received message:', decodedString);
-  const postData = {
-    heartRate: values[0],
-    spo2: [values[1]],
-  };
-  io.sockets.emit('dataUpdate',{heartRate: postData.heartRate, spo2: postData.spo2});
+// ws.on('message', (data) => {
+//   const decodedString = data.toString('utf-8');
+//   const values = decodedString.split(',')
+//  // console.log('Received message:', decodedString);
+//   const postData = {
+//     heartRate: values[0],
+//     spo2: [values[1]],
+//   };
+//   io.sockets.emit('dataUpdate',{heartRate: postData.heartRate, spo2: postData.spo2});
 
-  axios.post('https://jackback.onrender.com/api/OxyHeart', postData)
-    .then(response => {
-      //console.log('Data sent successfully:', response.data);
-    })
-    .catch(error => {
-      console.error('Error sending data:', error.message);
-    });
-});
+//   axios.post('https://jackback.onrender.com/api/OxyHeart', postData)
+//     .then(response => {
+//       //console.log('Data sent successfully:', response.data);
+//     })
+//     .catch(error => {
+//       console.error('Error sending data:', error.message);
+//     });
+// });
 
 
 
