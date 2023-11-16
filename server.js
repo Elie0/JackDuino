@@ -3,6 +3,7 @@ const bodyParser = require('body-parser');
 const webpush = require('web-push');
 const cors = require('cors');
 //const localIP = '192.168.1.118';
+const axios = require('axios');
 const localIP = '192.168.185.103';
 
 const vapidKeys = {
@@ -30,7 +31,7 @@ admin.initializeApp({
 });
 
 const db = admin.firestore();
-
+const WebSocket = require('ws');
 const fs = require('fs');
 const app = express();
 app.use(cors());
@@ -45,6 +46,33 @@ const io = require("socket.io")(server,{
 io.on('connection', () => (socket)=>{
   console.log("client connected",socket.id)
 });
+//const ws = new WebSocket('ws://192.168.185.100:80'); // Replace with the IP address of your ESP8266
+const ws = new WebSocket('ws://192.168.185.100:80'); 
+
+ws.on('open', () => {
+  console.log('Connected to WebSocket server');
+  ws.send('Hello from the client!');
+});
+
+ws.on('message', (data) => {
+  const decodedString = data.toString('utf-8');
+  const values = decodedString.split(',')
+ // console.log('Received message:', decodedString);
+  const postData = {
+    heartRate: values[0],
+    spo2: [values[1]],
+  };
+  io.sockets.emit('dataUpdate',{heartRate: postData.heartRate, spo2: postData.spo2});
+
+  axios.post('https://jackback.onrender.com/api/OxyHeart', postData)
+    .then(response => {
+      //console.log('Data sent successfully:', response.data);
+    })
+    .catch(error => {
+      console.error('Error sending data:', error.message);
+    });
+});
+
 
 
 app.use(bodyParser.json());
@@ -212,11 +240,9 @@ app.post('/api/GraphicalHeart', (req, res) => {
       res.status(500).json({ error: 'Failed to read data file' });
     } else {
       let jsonDataArray = fileContent.trim().split('\n');
-      // Keep only the latest 20 records
       if (jsonDataArray.length >= 40) {
         jsonDataArray = jsonDataArray.slice(jsonDataArray.length - 40);
       }
-      // Append the new data to the filtered content
       jsonDataArray.push(JSON.stringify(data));
       const formattedData = jsonDataArray.join('\n');
 
@@ -236,17 +262,14 @@ app.post('/api/GraphicalHeart', (req, res) => {
 })
 
 app.post('/api/update', (req, res) => {
-  const temperature = req.body.temperature;
-  io.sockets.emit('TempUpdate',temperature);
-  console.log('Received temperature:', temperature);
-  temp = temperature;
-
-  res.status(200).json({ temperature });
+  const bodytemperature = req.body.temperature;
+  const roomtemperature = req.body.temperature2;
+  
+  io.sockets.emit('TempUpdate', { bodytemperature, roomtemperature });
+  console.log('Received temperatures:', bodytemperature, roomtemperature);
+  
+  res.status(200).json({ bodytemperature, roomtemperature });
 });
-
-
-
-
 
 
 server.listen( port, () => {
