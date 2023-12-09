@@ -17,11 +17,11 @@ webpush.setVapidDetails(
   vapidKeys.privateKey
 );
 
+
+
 const dotenv = require('dotenv')
 dotenv.config({ path: `${__dirname}/Config.env` });
 const admin = require("firebase-admin")
-console.log(process.env.FIREBASE_PROJECT_ID)
-console.log(process.env.FIREBASE_PRIVATE_KEY)
 admin.initializeApp({
   credential: admin.credential.cert({
       projectId: process.env.FIREBASE_PROJECT_ID,   
@@ -46,8 +46,9 @@ const io = require("socket.io")(server,{
 io.on('connection', () => (socket)=>{
   console.log("client connected",socket.id)
 });
-//const ws = new WebSocket('ws://192.168.185.100:80'); // Replace with the IP address of your ESP8266
-//const ws = new WebSocket('ws://192.168.185.100:80'); 
+//const ws = new WebSocket('ws://192.168.185.100:80'); // Replace with the IP add ESP8266
+
+// const ws = new WebSocket('ws://192.168.249.114:80'); 
 
 // ws.on('open', () => {
 //   console.log('Connected to WebSocket server');
@@ -154,7 +155,6 @@ app.post('/api/subscribe',  async (req, res) => {
     res.send(error)
   }
 
-
 });
 
 
@@ -222,55 +222,116 @@ app.post('/api/OxyHeart', (req, res) => {
   res.status(200).json({ HeartRate});
 });
 
-app.post('/api/RoomTemp', (req, res) => {
-  const temp = req.body.RoomTemp;
-  console.log('RoomTemp:',temp);
-  io.sockets.emit('roomtempUpdate',temp);
-  res.status(200).json({ temp });
+
+app.post('/api/ECG', (req, res) => {
+  const DataArray = req.body;
+  console.log('Received Data:', DataArray);
+  io.sockets.emit('ECG',DataArray);
+  res.status(200).json(DataArray);
 });
 
-app.post('/api/GraphicalHeart', (req, res) => { 
+
+// const ws2 = new WebSocket('ws://192.168.249.236:8080'); 
+
+// ws2.on('open', () => {
+//   console.log('Connected to WebSocket server');
+//   ws2.send('Hello from the client!');
+// });
+
+// var DataArray = [];
+
+// ws2.on('message', (Data) => {
+//   const decodedString = Data.toString('utf-8');
+//   console.log('Received message:', decodedString);
+//   DataArray.push(decodedString);
+//   if(DataArray.length >=50)
+//   {
+//     DataArray = DataArray.slice(DataArray.length-50)
+//   } 
+//   const postData = {
+//     heartRate: DataArray
+//   };
+
+// })
+// setInterval(() => {
+//   // Assuming `DataArray` contains the data you want to send
+//   const postData = {
+//     heartRate: DataArray.slice(),
+//   };
+
+//   // Make an Axios POST request to your server
+//   axios.post('your-server-endpoint', postData)
+//     .then(response => {
+//       console.log('Data sent successfully:', response.data);
+//     })
+//     .catch(error => {
+//       console.error('Error sending data:', error);
+//     });
+// }, 2000);
+
   
-  const data = req.body;
-  console.log(data)
-  const filepath = 'C:/Users/eliea/Desktop/All-IN-ONE-JACKET/all-in-one-jacket/src/assets/data.json';
-  fs.readFile(filepath, 'utf8', (err, fileContent) => {
-    if (err) {
-      console.error('Error reading data file:', err);
-      res.status(500).json({ error: 'Failed to read data file' });
-    } else {
-      let jsonDataArray = fileContent.trim().split('\n');
-      if (jsonDataArray.length >= 40) {
-        jsonDataArray = jsonDataArray.slice(jsonDataArray.length - 40);
-      }
-      jsonDataArray.push(JSON.stringify(data));
-      const formattedData = jsonDataArray.join('\n');
+ 
+ // const filepath = 'C:/Users/eliea/Desktop/All-IN-ONE-JACKET/all-in-one-jacket/src/assets/data.json';
+  // fs.readFile(filepath, 'utf8', (err, fileContent) => {
+  //   if (err) {
+  //     console.error('Error reading data file:', err);
+  //   } else {
+  //     let jsonDataArray = fileContent.trim().split('\n');
+  //     if (jsonDataArray.length >= 200) {
+  //       jsonDataArray = jsonDataArray.slice(jsonDataArray.length - 200);
+  //     }
+  //     jsonDataArray.push(decodedString);
+  //     const formattedData = jsonDataArray.join('\n');
 
-      // Write the updated content back to the file
-      fs.writeFile(filepath, formattedData, (err) => {
-        if (err) {
-          console.error('Error saving data:', err);
-          res.status(500).json({ error: 'Failed to save data' });
-        } else {
-          console.log('Data saved to ' + filepath);
-          res.json({ message: 'Data received and saved successfully' });
-        }
-      });
-    }
-  });
+  //     // Write the updated content back to the file
+  //     // fs.writeFile(filepath, formattedData, (err) => {
+  //     //   if (err) {
+  //     //     console.error('Error saving data:', err);
+  //     //   } else {
+  //     //    // console.log('Data saved to ' + filepath);
+  //     //   }
+  //     // });
+  //   }
+  // });
      
-})
+// })
+// setInterval(() => {
+//   io.sockets.emit('ECG', DataArray.slice());  // Send a copy to prevent modification issues
+// }, 2000);
 
-app.post('/api/update', (req, res) => {
+
+
+
+
+app.post('/api/update', async (req, res) => {
+  console.log(req.body);
   const bodytemperature = req.body.temperature;
   const roomtemperature = req.body.temperature2;
-  
-  io.sockets.emit('TempUpdate', { bodytemperature, roomtemperature });
-  console.log('Received temperatures:', bodytemperature, roomtemperature);
-  
-  res.status(200).json({ bodytemperature, roomtemperature });
-});
 
+  io.sockets.emit('TempUpdate', { bodytemperature, roomtemperature });
+  console.log(parseInt(roomtemperature));
+
+  if (parseInt(roomtemperature) < 21) {
+    console.log('reach');
+    const TempnotificationPayload = {
+      notification: {
+        title: ' Room Temperature Hazard!',
+        body: `Room temperature is below 21 it is ${roomtemperature}`
+      }
+    };
+
+    try {
+      const subscribers = await fetchSubscribersFromDatabase();
+      await Promise.all(subscribers.map(sub => webpush.sendNotification(sub, JSON.stringify(TempnotificationPayload))));
+      console.log("notif sent succesfully")
+    } catch (err) {
+      console.error("Error sending notifications:", err);
+    }
+  }
+
+  console.log('Received temperatures:', bodytemperature, roomtemperature);
+  res.json({ bodytemperature, roomtemperature, message: 'Notifications processed successfully.' });
+});
 
 server.listen( port, () => {
   console.log(`Server is running on port ${port}`);
