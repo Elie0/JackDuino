@@ -224,10 +224,10 @@ app.post('/api/OxyHeart', (req, res) => {
 
 
 app.post('/api/ECG', (req, res) => {
-  const DataArray = req.body;
+  const DataArray = req.body.heartRate;
   console.log('Received Data:', DataArray);
   io.sockets.emit('ECG',DataArray);
-  res.status(200).json(DataArray);
+  res.status(200);
 });
 
 
@@ -259,8 +259,8 @@ app.post('/api/ECG', (req, res) => {
 //     heartRate: DataArray.slice(),
 //   };
 
-//   // Make an Axios POST request to your server
-//   axios.post('your-server-endpoint', postData)
+
+//   axios.post('http://localhost:3000/api/ECG', postData)
 //     .then(response => {
 //       console.log('Data sent successfully:', response.data);
 //     })
