@@ -231,6 +231,8 @@ app.post('/api/ECG', (req, res) => {
 });
 
 
+
+
 // const ws2 = new WebSocket('ws://192.168.249.236:8080'); 
 
 // ws2.on('open', () => {
@@ -242,7 +244,7 @@ app.post('/api/ECG', (req, res) => {
 
 // ws2.on('message', (Data) => {
 //   const decodedString = Data.toString('utf-8');
-//   console.log('Received message:', decodedString);
+//  // console.log('Received message:', decodedString);
 //   DataArray.push(decodedString);
 //   if(DataArray.length >=50)
 //   {
@@ -254,13 +256,20 @@ app.post('/api/ECG', (req, res) => {
 
 // })
 // setInterval(() => {
+//   io.sockets.emit('ECG', DataArray.slice());  // Send a copy to prevent modification issues
+// }, 2500);
+
+
+
+
+// setInterval(() => {
 //   // Assuming `DataArray` contains the data you want to send
 //   const postData = {
 //     heartRate: DataArray.slice(),
 //   };
 
-
-//   axios.post('http://localhost:3000/api/ECG', postData)
+//   // Make an Axios POST request to your server
+//   axios.post('https://jackback.onrender.com/api/ECG', postData)
 //     .then(response => {
 //       console.log('Data sent successfully:', response.data);
 //     })
@@ -269,36 +278,64 @@ app.post('/api/ECG', (req, res) => {
 //     });
 // }, 2000);
 
+
+
+
+app.post('/api/SaveECG', async (req, res) => {
+  const { name, points } = req.body;
+
+  console.log('Received data:', { name, points });
+
+  try {
   
- 
- // const filepath = 'C:/Users/eliea/Desktop/All-IN-ONE-JACKET/all-in-one-jacket/src/assets/data.json';
-  // fs.readFile(filepath, 'utf8', (err, fileContent) => {
-  //   if (err) {
-  //     console.error('Error reading data file:', err);
-  //   } else {
-  //     let jsonDataArray = fileContent.trim().split('\n');
-  //     if (jsonDataArray.length >= 200) {
-  //       jsonDataArray = jsonDataArray.slice(jsonDataArray.length - 200);
-  //     }
-  //     jsonDataArray.push(decodedString);
-  //     const formattedData = jsonDataArray.join('\n');
+    // Check if a document with the same name already exists
+    const existingDoc = await db.collection("ECG").doc(name).get();
 
-  //     // Write the updated content back to the file
-  //     // fs.writeFile(filepath, formattedData, (err) => {
-  //     //   if (err) {
-  //     //     console.error('Error saving data:', err);
-  //     //   } else {
-  //     //    // console.log('Data saved to ' + filepath);
-  //     //   }
-  //     // });
-  //   }
-  // });
-     
-// })
-// setInterval(() => {
-//   io.sockets.emit('ECG', DataArray.slice());  // Send a copy to prevent modification issues
-// }, 2000);
+    if (existingDoc.exists) {
+      console.log('yes')
+      res.json({ success: false, error: 'Document with the same name already exists' });
+    } else {
+      await db.collection("ECG").doc(name).set({ points });
+      res.status(200).json({ success: true, chartId: name });
+    }
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ success: false, error: 'Internal Server Error' });
+  }
+});
 
+app.get('/api/GetAllSavedECGNames', async (req, res) => {
+
+  console.log('namesReached')
+  try {
+    const usersRef = db.collection("ECG");
+    const response = await usersRef.get();
+
+    const docNames = response.docs.map(doc => doc.id);
+    res.send(docNames);
+  } catch (err) {
+    res.status(500).send(err);
+  }
+});
+
+
+
+app.get('/api/GetSavedECG', async (req, res) => {
+  try {
+    const chartName = req.query.name; 
+    console.log(chartName)
+
+    const userRef = db.collection("ECG").doc(chartName);
+    const doc = await userRef.get();
+    if (doc.exists) {
+      res.send(doc.data().pointsToSend);
+    } else {
+      res.send({ error: "Document not found" });
+    }
+  } catch (err) {
+    res.status(500).send(err);
+  }
+});
 
 
 
