@@ -244,7 +244,7 @@ app.post('/api/ECG', (req, res) => {
 
 // ws2.on('message', (Data) => {
 //   const decodedString = Data.toString('utf-8');
-//  // console.log('Received message:', decodedString);
+//   console.log('Received message:', decodedString);
 //   DataArray.push(decodedString);
 //   if(DataArray.length >=50)
 //   {
@@ -328,7 +328,7 @@ app.get('/api/GetSavedECG', async (req, res) => {
     const userRef = db.collection("ECG").doc(chartName);
     const doc = await userRef.get();
     if (doc.exists) {
-      res.send(doc.data().pointsToSend);
+      res.send(doc.data().points);
     } else {
       res.send({ error: "Document not found" });
     }
