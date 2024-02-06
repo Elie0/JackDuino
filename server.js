@@ -2,9 +2,6 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const webpush = require('web-push');
 const cors = require('cors');
-//const localIP = '192.168.1.118';
-const axios = require('axios');
-const localIP = '192.168.185.103';
 
 const vapidKeys = {
   publicKey: 'BKyb9hW4_7W3znqT1snpqH4zNFmvdBppRBqIOY-n32t18kyfW7j-RBBINg1yIUI-cPF82UQXnK0tuC_0UDEf2Cg',
@@ -46,85 +43,14 @@ const io = require("socket.io")(server,{
 io.on('connection', () => (socket)=>{
   console.log("client connected",socket.id)
 });
-//const ws = new WebSocket('ws://192.168.185.100:80'); // Replace with the IP add ESP8266
-
-// const ws = new WebSocket('ws://192.168.249.114:80'); 
-
-// ws.on('open', () => {
-//   console.log('Connected to WebSocket server');
-//   ws.send('Hello from the client!');
-// });
-
-// ws.on('message', (data) => {
-//   const decodedString = data.toString('utf-8');
-//   const values = decodedString.split(',')
-//   console.log('Received message:', decodedString);
-//   const postData = {
-//     heartRate: values[0],
-//     spo2: [values[1]],
-//   };
-//   io.sockets.emit('dataUpdate',{heartRate: postData.heartRate, spo2: postData.spo2});
-
-//   axios.post('https://jackback.onrender.com/api/OxyHeart', postData)
-//     .then(response => {
-//       //console.log('Data sent successfully:', response.data);
-//     })
-//     .catch(error => {
-//       console.error('Error sending data:', error.message);
-//     });
-// });
-
-
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-app.post('/api/FallDetected', async (req, res) => {
-  const fallStatus = req.body.fallstatus;
-  const currentDate =  new Date();
-  const formattedTime = currentDate.toLocaleString('en-US',{
-    timeZone:'EET'
-  });
-  const formattedDate = currentDate.toDateString();
-  const IsoData = formattedTime.split(',')
-  const Isod = currentDate.toISOString().split('T')[0];
-  const IsoTime = IsoData [1]
-  console.log(formattedDate+ " " + formattedTime)
 
-  const FallEvent = {
-      IsoDate: Isod,
-      Date:formattedDate,
-      Time:IsoTime
-  }
-  try{ const response = await db.collection("Falls").add(FallEvent);
 
-}
- catch(err){
-  console.log(err)
-}
 
-  if (fallStatus === 1) {
-
-    const notificationPayload = {
-      notification: {
-        title: 'Fall Detected',
-        body: 'A fall has been detected.'
-      }
-    };
-
-    try {
-      const subscribers = await fetchSubscribersFromDatabase();
-      // Send notifications to subscribers
-     await Promise.all(subscribers.map(sub => webpush.sendNotification(sub, JSON.stringify(notificationPayload))))
-
-      res.status(200).json({ message: 'Notifications sent successfully.' });
-    } catch (err) {
-      console.error("Error sending notifications:", err);
-      res.sendStatus(500);
-    }
-  }
-});
-
+// Push Notification Api's
 
 app.get ('/api/subscriptions',async(req,res)=>{
 
@@ -174,6 +100,56 @@ async function fetchSubscribersFromDatabase() {
   }
 }
 
+
+// Fall Detection Api's
+
+
+
+app.post('/api/FallDetected', async (req, res) => {
+  const fallStatus = req.body.fallstatus;
+  const currentDate =  new Date();
+  const formattedTime = currentDate.toLocaleString('en-US',{
+    timeZone:'EET'
+  });
+  const formattedDate = currentDate.toDateString();
+  const IsoData = formattedTime.split(',')
+  const Isod = currentDate.toISOString().split('T')[0];
+  const IsoTime = IsoData [1]
+  console.log(formattedDate+ " " + formattedTime)
+
+  const FallEvent = {
+      IsoDate: Isod,
+      Date:formattedDate,
+      Time:IsoTime
+  }
+  try{ const response = await db.collection("Falls").add(FallEvent);
+
+}
+ catch(err){
+  console.log(err)
+}
+
+  if (fallStatus === 1) {
+
+    const notificationPayload = {
+      notification: {
+        title: 'Fall Detected',
+        body: 'A fall has been detected.'
+      }
+    };
+
+    try {
+      const subscribers = await fetchSubscribersFromDatabase();
+     await Promise.all(subscribers.map(sub => webpush.sendNotification(sub, JSON.stringify(notificationPayload))))
+      res.status(200).json({ message: 'Notifications sent successfully.' });
+    } catch (err) {
+      console.error("Error sending notifications:", err);
+      res.sendStatus(500);
+    }
+  }
+});
+
+
 app.get ('/api/ReadFall',async(req,res)=>{
   try{
     const usersRef = db.collection("Falls");
@@ -214,14 +190,21 @@ app.get ('/api/ReadFall',async(req,res)=>{
     }
   });
 
+
+
+// Heart And Oxygen API
+
+
+
 app.post('/api/OxyHeart', (req, res) => {
   const HeartRate = req.body.heartRate;
   const OxyRate = req.body.spo2;
   console.log('Received Data:', HeartRate+" hbp ",OxyRate+" % ");
   io.sockets.emit('dataUpdate',{heartRate: HeartRate, spo2: OxyRate});
-  res.status(200).json({ HeartRate});
+  res.status(200);
 });
 
+// ECG Api's
 
 app.post('/api/ECG', (req, res) => {
   const DataArray = req.body.heartRate;
@@ -232,55 +215,6 @@ app.post('/api/ECG', (req, res) => {
 
 
 
-
-// const ws2 = new WebSocket('ws://192.168.249.236:8080'); 
-
-// ws2.on('open', () => {
-//   console.log('Connected to WebSocket server');
-//   ws2.send('Hello from the client!');
-// });
-
-// var DataArray = [];
-
-// ws2.on('message', (Data) => {
-//   const decodedString = Data.toString('utf-8');
-//   console.log('Received message:', decodedString);
-//   DataArray.push(decodedString);
-//   if(DataArray.length >=50)
-//   {
-//     DataArray = DataArray.slice(DataArray.length-50)
-//   } 
-//   const postData = {
-//     heartRate: DataArray
-//   };
-
-// })
-// setInterval(() => {
-//   io.sockets.emit('ECG', DataArray.slice());  // Send a copy to prevent modification issues
-// }, 2500);
-
-
-
-
-// setInterval(() => {
-//   // Assuming `DataArray` contains the data you want to send
-//   const postData = {
-//     heartRate: DataArray.slice(),
-//   };
-
-//   // Make an Axios POST request to your server
-//   axios.post('https://jackback.onrender.com/api/ECG', postData)
-//     .then(response => {
-//       console.log('Data sent successfully:', response.data);
-//     })
-//     .catch(error => {
-//       console.error('Error sending data:', error);
-//     });
-// }, 2000);
-
-
-
-
 app.post('/api/SaveECG', async (req, res) => {
   const { name, points } = req.body;
 
@@ -288,7 +222,6 @@ app.post('/api/SaveECG', async (req, res) => {
 
   try {
   
-    // Check if a document with the same name already exists
     const existingDoc = await db.collection("ECG").doc(name).get();
 
     if (existingDoc.exists) {
@@ -338,7 +271,7 @@ app.get('/api/GetSavedECG', async (req, res) => {
 });
 
 
-
+//Temperature Api
 
 app.post('/api/update', async (req, res) => {
   console.log(req.body);
@@ -369,6 +302,8 @@ app.post('/api/update', async (req, res) => {
   console.log('Received temperatures:', bodytemperature, roomtemperature);
   res.json({ bodytemperature, roomtemperature, message: 'Notifications processed successfully.' });
 });
+
+
 
 server.listen( port, () => {
   console.log(`Server is running on port ${port}`);
